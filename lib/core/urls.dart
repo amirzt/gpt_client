@@ -47,4 +47,15 @@ class GlobalURL{
   static Uri getAppstoreCode = Uri(scheme: scheme, host: host, path: '/api/shop/get_appstore_code/');
   static Uri getZarinpalUrl = Uri(scheme: scheme, host: host, path: '/api/shop/get_zarinpal_url/');
 
+  // conversation
+  static Uri createConversation = Uri(scheme: scheme, host: host, path: '/api/shop/create_conversation/');
+  static Uri getConversation = Uri(scheme: scheme, host: host, path: '/api/shop/get_conversation/');
+  static Uri updateConversation = Uri(scheme: scheme, host: host, path: '/api/shop/update_conversation/');
+  static Uri deleteConversation = Uri(scheme: scheme, host: host, path: '/api/shop/delete_conversation/');
+  static Uri addMessage = Uri(scheme: scheme, host: host, path: '/api/shop/add_message/');
+  static Uri getMessage = Uri(scheme: scheme, host: host, path: '/api/shop/get_message/');
+
+  // items
+  static Uri getItems = Uri(scheme: scheme, host: host, path: '/api/shop/get_items/');
+  static Uri getCategories = Uri(scheme: scheme, host: host, path: '/api/shop/get_categories/');
 }

@@ -1,4 +1,6 @@
 
+import 'package:gpt/data/models/conversation_model.dart';
+import 'package:gpt/data/models/items_model.dart';
 import 'package:gpt/provider/token.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:platform_device_id_v3/platform_device_id.dart';
@@ -91,6 +93,99 @@ class ApiProvider {
         token,
         GlobalURL.getEmail);
     return response['email'];
+  }
+
+  Future<List<Category>> getCategories() async{
+    List<Category> categories = [];
+    String token = await TokenService().getToken();
+    List response = await GlobalService().getRequestListReturn(
+        token,
+        GlobalURL.getCategories);
+    for(var i=0 ; i<response.length ; i++){
+      categories.add(Category.fromJson(response[i]));
+    }
+    return categories;
+  }
+
+  Future<List<Item>> getItems(int category) async{
+    List<Item> items = [];
+    String token = await TokenService().getToken();
+    List response = await GlobalService().postRequestListReturn(
+        token,
+        GlobalURL.getItems,
+        {'category': category.toString()});
+    for(var i=0 ; i<response.length ; i++){
+      items.add(Item.fromJson(response[i]));
+    }
+    return items;
+  }
+
+  Future<List<Conversation>> getConversations() async{
+    List<Conversation> conversations = [];
+    String token = await TokenService().getToken();
+    List response = await GlobalService().getRequestListReturn(
+        token,
+        GlobalURL.getConversation);
+    for(var i=0 ; i<response.length ; i++){
+      conversations.add(Conversation.fromJson(response[i]));
+    }
+    return conversations;
+  }
+
+
+  Future<List<Message>> getMessages(int conversation) async{
+    List<Message> messages = [];
+    String token = await TokenService().getToken();
+    List response = await GlobalService().postRequestListReturn(
+        token,
+        GlobalURL.getMessage,
+        {'conversation': conversation.toString()});
+    for(var i=0 ; i<response.length ; i++){
+      messages.add(Message.fromJson(response[i]));
+    }
+    return messages;
+  }
+
+  Future<void> createConversation(String gptModel) async{
+    String token = await TokenService().getToken();
+    await GlobalService().postRequestMapReturn(
+        token,
+        GlobalURL.createConversation,
+        {'gpt_model': gptModel});
+  }
+
+  Future<void> updateConversation(int id, String summary) async{
+    String token = await TokenService().getToken();
+    await GlobalService().postRequestMapReturn(
+        token,
+        GlobalURL.updateConversation,
+        {'id': id.toString(),
+          'summary': summary});
+  }
+
+  Future<void> deleteConversation(int id) async{
+    String token = await TokenService().getToken();
+    await GlobalService().postRequestMapReturn(
+        token,
+        GlobalURL.deleteConversation,
+        {'id': id.toString()});
+  }
+
+  Future<void> addMessage(int conversation, Message message) async{
+    String token = await TokenService().getToken();
+    Map body = {
+      'conversation': conversation.toString(),
+      'role': message.role,
+    };
+    if(message.image != ''){
+      body['image'] = message.image;
+    }else{
+      body['content'] = message.content;
+    }
+    await GlobalService().postRequestMapReturn(
+        token,
+        GlobalURL.addMessage,
+        body);
   }
 
 }
