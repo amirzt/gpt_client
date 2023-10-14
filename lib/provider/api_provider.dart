@@ -188,4 +188,8 @@ class ApiProvider {
         body);
   }
 
+  Future<void> sendMessageToGPT(Message message) async{
+
+  }
+
 }
