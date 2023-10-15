@@ -12,4 +12,6 @@ class RootController extends GetxController{
     const Taskpage(),
     HistoryPage()
   ];
+
+  PageController pageController = PageController(initialPage: 0);
 }

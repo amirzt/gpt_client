@@ -1,5 +1,5 @@
 
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpt/module/home/home_controller.dart';
 
@@ -8,8 +8,12 @@ class HomePage extends GetView<HomeController>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    Get.put(HomeController());
+    return Scaffold(
+      body: Center(
+        child: Text('test test test'),
+      ),
+    );
   }
 
 }

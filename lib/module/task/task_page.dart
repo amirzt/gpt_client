@@ -1,5 +1,5 @@
 
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpt/module/task/task_controller.dart';
 
@@ -8,8 +8,12 @@ class Taskpage extends GetView<TaskController>{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    Get.put(TaskController());
+    return Scaffold(
+      body: Center(
+        child: Text('test 2 '),
+      ),
+    );
   }
 
 }

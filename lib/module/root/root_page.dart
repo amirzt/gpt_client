@@ -10,16 +10,15 @@ class RootPage extends GetView<RootController>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const GlobalAppBar(),
-      bottomNavigationBar: const MyBottomNavigation(),
-      body: Obx(() {
-        return IndexedStack(
-          index: controller.currentIndex.value,
+    return SafeArea(child: Scaffold(
+        appBar: const GlobalAppBar(),
+        bottomNavigationBar: const MyBottomNavigation(),
+        body: PageView(
+          controller: controller.pageController,
+          physics: const NeverScrollableScrollPhysics(),
           children: controller.pages,
-        );
-      }),
-    );
+        )
+    ));
   }
 
 }

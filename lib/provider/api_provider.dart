@@ -1,4 +1,5 @@
 
+import 'package:gpt/data/models/app_version.dart';
 import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/data/models/items_model.dart';
 import 'package:gpt/provider/token.dart';
@@ -44,6 +45,7 @@ class ApiProvider {
       prefs.setBool('expired', response['expired']);
       prefs.setString('username', response['username']);
       prefs.setBool('yearly', response['yearly']);
+      prefs.setString('api_key', response['api_key']);
       List admob = response['admob'];
       for(var i=0 ; i<admob.length ; i++){
         prefs.setString(admob[i]['type'], admob[i]['code']);
@@ -191,5 +193,11 @@ class ApiProvider {
   Future<void> sendMessageToGPT(Message message) async{
 
   }
+  //
+  // Future<AppVersion> getAppVersion() async{
+  //   String token = await TokenService().getToken();
+  //
+  //   Map response = await GlobalService().postRequestMapReturn(token, uri, body)
+  // }
 
 }
