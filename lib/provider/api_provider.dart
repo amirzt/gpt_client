@@ -109,15 +109,15 @@ class ApiProvider {
     return categories;
   }
 
-  Future<List<Item>> getItems(int category) async{
-    List<Item> items = [];
+  Future<List<Task>> getItems(int category) async{
+    List<Task> items = [];
     String token = await TokenService().getToken();
     List response = await GlobalService().postRequestListReturn(
         token,
         GlobalURL.getItems,
         {'category': category.toString()});
     for(var i=0 ; i<response.length ; i++){
-      items.add(Item.fromJson(response[i]));
+      items.add(Task.fromJson(response[i]));
     }
     return items;
   }

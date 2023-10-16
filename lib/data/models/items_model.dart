@@ -7,21 +7,24 @@ class Category {
       Category(name: json['name'], id: json['id']);
 }
 
-class Item {
+class Task {
   String name;
   int id;
   String icon;
   String description;
   String script;
+  bool offline;
 
-  Item(
+  Task(
       {required this.name,
       required this.id,
       required this.icon,
       required this.description,
+      required this.offline,
       required this.script});
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
+  factory Task.fromJson(Map<String, dynamic> json) => Task(
+      offline: json['offline'],
       name: json['name'],
       id: json['id'],
       icon: json['icon'],

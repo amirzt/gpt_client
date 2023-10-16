@@ -23,7 +23,7 @@ class GlobalAppBar extends GetWidget<RootController> implements PreferredSizeWid
                 Get.back();
               },
               icon: Icon(FontAwesomeIcons.chevronLeft,
-              color: GlobalColors.black,)),
+              color: GlobalColors.secondBackgroundColor,)),
         ],
       ),
     );

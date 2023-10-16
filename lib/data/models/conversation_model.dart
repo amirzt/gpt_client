@@ -3,11 +3,13 @@ class Conversation {
   String gptModel;
   String createdDate;
   int id;
+  String lastMessage = '...';
 
   Conversation(
       {required this.summary,
       required this.gptModel,
       required this.createdDate,
+        required this.lastMessage,
       required this.id});
 
   factory Conversation.fromJson(Map<String, dynamic> json) {
@@ -16,6 +18,7 @@ class Conversation {
       gptModel: json['gpt_model'],
       createdDate: json['created_at'],
       id: json['id'],
+      lastMessage: json['last_message'] ?? '...',
     );
   }
 }

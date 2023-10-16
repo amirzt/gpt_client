@@ -10,7 +10,7 @@ class TaskController extends GetxController {
   var selectedIndex = 0.obs;
 
   List<Category> categories = [];
-  List<Item> items = [];
+  List<Task> items = [];
 
   getCategories() async{
     isCategoryLoading.value = true;
