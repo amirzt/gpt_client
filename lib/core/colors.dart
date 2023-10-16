@@ -11,7 +11,7 @@ class GlobalColors {
   static Color grey = const Color.fromARGB(255, 72, 72, 72);
 
   // text
-  static Color borderColor = const Color.fromARGB(255, 26, 173, 125);
+  static Color borderColor = const Color.fromARGB(102, 26, 173, 125);
   static Color greenTextColor = const Color.fromARGB(255, 26, 173, 125);
   static Color whiteTextColor = const Color.fromARGB(255, 255, 255, 255);
   static Color bodyTextColor = const Color.fromARGB(255, 225, 225, 225);

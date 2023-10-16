@@ -12,12 +12,13 @@ class TaskItemWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: GlobalColors.secondPrimaryColor,
+        color: GlobalColors.secondBackgroundColor,
         border: Border.all(color: GlobalColors.borderColor, width: 1),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(15),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             task.offline ? Image.asset(task.icon) : Image.network(task.icon),
             const SizedBox(

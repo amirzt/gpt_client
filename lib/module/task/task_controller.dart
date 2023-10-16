@@ -9,8 +9,25 @@ class TaskController extends GetxController {
 
   var selectedIndex = 0.obs;
 
-  List<Category> categories = [];
-  List<Task> items = [];
+  List<Category> categories = [
+    Category(name: 'category', id: 1),
+    Category(name: 'category', id: 1),
+    Category(name: 'category', id: 1),
+    Category(name: 'category', id: 1),
+    Category(name: 'category', id: 1),
+    Category(name: 'category', id: 1),
+
+  ];
+  List<Task> items = [
+    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
+    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
+    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
+    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
+    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
+    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
+    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
+
+  ];
 
   getCategories() async{
     isCategoryLoading.value = true;
