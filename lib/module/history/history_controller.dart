@@ -4,7 +4,13 @@ import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/provider/api_provider.dart';
 
 class HistoryController extends GetxController {
-  List<Conversation> conversations = [];
+  List<Conversation> conversations = [
+    Conversation(summary: 'this is a summary for chat', gptModel: 'gptModel', createdDate: 'createdDate', lastMessage: 'lastMessage', id: 1),
+    Conversation(summary: 'this is a summary for chat', gptModel: 'gptModel', createdDate: 'createdDate', lastMessage: 'lastMessage', id: 1),
+    Conversation(summary: 'this is a summary for chat', gptModel: 'gptModel', createdDate: 'createdDate', lastMessage: 'lastMessage', id: 1),
+    Conversation(summary: 'this is a summary for chat', gptModel: 'gptModel', createdDate: 'createdDate', lastMessage: 'lastMessage', id: 1),
+
+  ];
   var isLoading = false.obs;
 
   getConversations() async {

@@ -1,7 +1,12 @@
 
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:get/get.dart';
 import 'package:gpt/data/models/app_version.dart';
 import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/data/models/items_model.dart';
+import 'package:gpt/module/chat/chat_controller.dart';
 import 'package:gpt/provider/token.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:platform_device_id_v3/platform_device_id.dart';
@@ -10,6 +15,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../core/urls.dart';
 import '../data/models/plan_model.dart';
 import '../services/global_services.dart';
+import 'package:http/http.dart' as http;
 
 class ApiProvider {
   void splash() async{
@@ -29,10 +35,10 @@ class ApiProvider {
 
   Future<bool> login() async {
     String? deviceId = await PlatformDeviceId.getDeviceId;
-    
+
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String packageName = packageInfo.packageName;
-    
+
     // String deviceId = '';
     Map response = await GlobalService()
         .login(GlobalURL.loginUri, {
@@ -190,14 +196,68 @@ class ApiProvider {
         body);
   }
 
-  Future<void> sendMessageToGPT(Message message) async{
+  Future<void> sendMessageToGPT(List messages) async{
+    messages = [
+      {
+        "role": "user",
+        "content": "Who won the world series in 2020?"
+      },
+      {
+        "role": "assistant",
+        "content": "The Los Angeles Dodgers won the World Series in 2020."
+      },
+      {
+        "role": "user",
+        "content": "what about 2021"
+      },
+      {
+        "role": "assistant",
+        "content": "As of my knowledge cutoff in September 2021, the World Series for the year has not yet taken place. Therefore, I am unable to provide you with the winner of the 2021 World Series."
+      },
+      {
+        "role": "user",
+        "content": "what about 2018"
+      }
+    ];
+    const url = 'https://api.openai.com/v1/chat/completions';
+
+    final headers = {
+      'Authorization': 'Bearer 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',
+      'Content-Type': 'application/json',
+    };
+    final body = json.encode({
+      'messages': messages,
+      "model": "gpt-3.5-turbo",
+      'stream': true,
+    });
+    ChatController controller = Get.put(ChatController());
+    controller.message.value = '';
+
+    http.Client client = http.Client();
+    http.Request request = http.Request('POST', Uri.parse(url));
+    request.body = body;
+    request.headers.addAll(headers);
+    // request.headers = [];
+
+    StreamSubscription streamSubscription;
+    streamSubscription = client.send(request).asStream().listen((response) {
+      response.stream.listen((event) {
+        // Handle the received event
+        // The event will be of type http.StreamedResponse
+        // You can extract data using event.stream or event.stream.bytesToString()
+        // print('1');
+        Map content = json.decode(utf8.decode(event).split('data: ')[1]);
+        // print(content);
+        controller.message.value += content['choices'][0]['delta']['content'];
+
+
+      }, onError: (error) {
+        // Handle any error that occurs during the connection or data retrieval
+      }, cancelOnError: true);
+    }, onError: (error) {
+      // Handle any error that occurs while establishing the connection
+    });
 
   }
-  //
-  // Future<AppVersion> getAppVersion() async{
-  //   String token = await TokenService().getToken();
-  //
-  //   Map response = await GlobalService().postRequestMapReturn(token, uri, body)
-  // }
 
 }

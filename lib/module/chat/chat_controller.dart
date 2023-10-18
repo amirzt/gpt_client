@@ -4,21 +4,30 @@ import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/provider/api_provider.dart';
 
 class ChatController extends GetxController{
-  late Conversation conversation;
+  Conversation conversation = Conversation(summary: 'summary', gptModel: 'gptModel', createdDate: 'createdDate', lastMessage: 'lastMessage', id: 1);
+  var message = ''.obs;
+  var gptModel = 'GPT-turbo'.obs;
+
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    conversation = Get.arguments as Conversation;
-    getMessages();
+    // conversation = Get.arguments as Conversation;
+    // getMessages();
   }
 
-  List<Message> messages = [];
+  RxList<Message> messages = <Message>[].obs;
   var isMessageLoading = false.obs;
+
+  Future<void> sendMessage() async {
+    // messages.add();
+    // late Message message;
+    await ApiProvider().sendMessageToGPT([]);
+  }
 
   getMessages() async{
     isMessageLoading.value = true;
-    messages = await ApiProvider().getMessages(conversation.id);
+    messages.value = await ApiProvider().getMessages(conversation.id);
     isMessageLoading.value = false;
   }
 
@@ -29,6 +38,6 @@ class ChatController extends GetxController{
   sendMessageToGPT(Message message){
     messages.add(message);
     update();
-    ApiProvider().sendMessageToGPT(message);
+    // ApiProvider().sendMessageToGPT(message);
   }
 }

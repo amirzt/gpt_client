@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
 import 'package:gpt/data/models/conversation_model.dart';
+import 'package:gpt/module/chat/chat_page.dart';
 
 class ChatItemWidget extends StatelessWidget {
   final Conversation conversation;
@@ -56,7 +58,7 @@ class ChatItemWidget extends StatelessWidget {
                 ],
               )),
           onTap: (){
-            
+            Get.to(const ChatPage());
           },
         ));
   }
