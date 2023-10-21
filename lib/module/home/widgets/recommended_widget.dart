@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
 import 'package:gpt/core/constants.dart';
 import 'package:gpt/data/models/items_model.dart';
+import 'package:gpt/module/chat/chat_page.dart';
+import 'package:gpt/module/chat/widgets/input_widget.dart';
 import 'package:gpt/module/home/home_controller.dart';
 
 class RecommendedWidget extends GetWidget<HomeController> {
@@ -14,25 +16,97 @@ class RecommendedWidget extends GetWidget<HomeController> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Stack(
         children: [
-          Text(
-            GlobalStrings.recommendedTasks,
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: GlobalColors.whiteTextColor),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                GlobalStrings.recommendedTasks,
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: GlobalColors.whiteTextColor),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: controller.recommended.length,
+                    itemBuilder: (context, index) {
+                      return RecommendedItem(controller.recommended[index]);
+                    }),
+              )
+            ],
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: controller.recommended.length,
-                itemBuilder: (context, index) {
-                  return RecommendedItem(controller.recommended[index]);
-                }),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: GestureDetector(
+              onTap: () {
+                Get.to(const ChatPage());
+              },
+              child: AbsorbPointer(
+                child: Row(
+                  textDirection: TextDirection.ltr,
+                  children: [
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: GlobalColors.divider),
+                        child: TextFormField(
+                          // controller: controller.textEditingController,
+                          style: TextStyle(
+                            color: GlobalColors.whiteTextColor,
+                          ),
+                          // textDirection: LocaleServices()
+                          //     .detectTextDirection(controller.textValue.value),
+                          // textDirection: TextDirection.rtl,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: null,
+                          decoration: InputDecoration(
+                              prefixIcon: IconButton(
+                                icon: Image.asset(
+                                  'assets/icons/scan.png',
+                                  color: GlobalColors.whiteTextColor,
+                                ),
+                                onPressed: () {},
+                              ),
+                              hintText: GlobalStrings.typeMessageHere,
+                              hintStyle: TextStyle(color: GlobalColors.whiteTextColor,),
+                              border: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              focusedErrorBorder: InputBorder.none),
+                        )
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                        width: 55,
+                        height: 55,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: GlobalColors.greenTextColor),
+                        child: InkWell(
+                          child: Image.asset(
+                            'assets/icons/voice.png',
+                            color: GlobalColors.whiteTextColor,
+                          ),
+                          onTap: () {
+                          },
+                        ))
+                  ],
+                ),
+              ),
+            ),
           )
         ],
       ),

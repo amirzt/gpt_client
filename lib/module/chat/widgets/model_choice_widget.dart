@@ -11,7 +11,7 @@ class ModelChoiceWidget extends GetWidget<ChatController> {
     return Padding(
       padding: const EdgeInsets.only(top: 10, bottom: 10, right: 20, left: 20),
       child: Container(
-        height: 100,
+        height: 40,
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
@@ -57,6 +57,7 @@ class ModelChoiceWidget extends GetWidget<ChatController> {
                       },
                       child: Center(
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset('assets/icons/lock.png'),
                             const SizedBox(width: 10,),

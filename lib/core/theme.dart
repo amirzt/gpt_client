@@ -52,6 +52,7 @@ class ThemeConfig {
       textTheme: myTextTheme,
       canvasColor: background,
       cardColor: cardBackground,
+      splashColor: GlobalColors.secondBackgroundColor,
       dividerColor: divider,
       dividerTheme: DividerThemeData(
         color: divider,
@@ -229,5 +230,6 @@ class ThemeConfig {
     buttonText: GlobalColors.whiteTextColor,
     disabled: GlobalColors.divider,
     error: GlobalColors.errorColor,
+
   );
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
 import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/module/chat/chat_page.dart';
+import 'package:gpt/services/locale_services.dart';
 
 class ChatItemWidget extends StatelessWidget {
   final Conversation conversation;
@@ -12,21 +13,30 @@ class ChatItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          color: GlobalColors.thirdBackgroundColor,
-          border: Border.all(color: GlobalColors.borderColor, width: 1),
-        ),
-        child: InkWell(
-          child:Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                children: [
-                  Flexible(flex: 5,
-                    child: Column(
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+      child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            color: GlobalColors.thirdBackgroundColor,
+            border: Border.all(color: GlobalColors.borderColor, width: 1),
+          ),
+          child: InkWell(
+            child:Padding(
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.chevronRight,
+                      color: GlobalColors.whiteTextColor,
+                      size: 20,
+                    ),
+                    const Spacer(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(conversation.summary,
+                            textDirection: LocaleServices().detectTextDirection(conversation.lastMessage),
                             style: TextStyle(
                                 color: GlobalColors.whiteTextColor,
                                 fontSize: 16,
@@ -35,31 +45,29 @@ class ChatItemWidget extends StatelessWidget {
                           height: 10,
                         ),
                         Text(conversation.lastMessage,
-                            maxLines: 2,
+                            maxLines: 3,
+                            textDirection: LocaleServices().detectTextDirection(conversation.lastMessage),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: GlobalColors.whiteTextColor,
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.normal)),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         Text(conversation.createdDate,
                             style: TextStyle(
                                 color: GlobalColors.fadeTextColor,
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal))
                       ],
-                    ),),
-                  Flexible(
-                      flex: 1,
-                      child: Icon(
-                        FontAwesomeIcons.chevronRight,
-                        color: GlobalColors.whiteTextColor,
-                        size: 20,
-                      ))
-                ],
-              )),
-          onTap: (){
-            Get.to(const ChatPage());
-          },
-        ));
+                    )
+                  ],
+                )),
+            onTap: (){
+              Get.to(const ChatPage());
+            },
+          )),
+    );
   }
 }

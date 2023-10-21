@@ -196,29 +196,9 @@ class ApiProvider {
         body);
   }
 
-  Future<void> sendMessageToGPT(List messages) async{
-    messages = [
-      {
-        "role": "user",
-        "content": "Who won the world series in 2020?"
-      },
-      {
-        "role": "assistant",
-        "content": "The Los Angeles Dodgers won the World Series in 2020."
-      },
-      {
-        "role": "user",
-        "content": "what about 2021"
-      },
-      {
-        "role": "assistant",
-        "content": "As of my knowledge cutoff in September 2021, the World Series for the year has not yet taken place. Therefore, I am unable to provide you with the winner of the 2021 World Series."
-      },
-      {
-        "role": "user",
-        "content": "what about 2018"
-      }
-    ];
+  Future<void> sendMessageToGPT(List<Message> messages) async{
+
+    List<Map<String, dynamic>> jsonMessages = messages.map((message) => message.toJson()).toList();
     const url = 'https://api.openai.com/v1/chat/completions';
 
     final headers = {
@@ -226,18 +206,20 @@ class ApiProvider {
       'Content-Type': 'application/json',
     };
     final body = json.encode({
-      'messages': messages,
+      'messages': jsonMessages,
       "model": "gpt-3.5-turbo",
       'stream': true,
     });
     ChatController controller = Get.put(ChatController());
-    controller.message.value = '';
-
+    controller.messages.insert(0,
+        Message(role: 'assistant', id: 0, stringContent: '', image: '')
+    );
     http.Client client = http.Client();
     http.Request request = http.Request('POST', Uri.parse(url));
     request.body = body;
     request.headers.addAll(headers);
     // request.headers = [];
+
 
     StreamSubscription streamSubscription;
     streamSubscription = client.send(request).asStream().listen((response) {
@@ -248,7 +230,14 @@ class ApiProvider {
         // print('1');
         Map content = json.decode(utf8.decode(event).split('data: ')[1]);
         // print(content);
-        controller.message.value += content['choices'][0]['delta']['content'];
+        if(content[0] != 'DONE'){
+          if(content['choices'][0]['delta'].containsKey('content')) {
+            controller.messages.first.content.value += content['choices'][0]['delta']['content'];
+            // controller.update();
+          }
+        }else{
+
+        }
 
 
       }, onError: (error) {

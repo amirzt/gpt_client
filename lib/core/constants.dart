@@ -21,5 +21,9 @@ class GlobalStrings{
   static String summaryDesc = 'Summarize Text';
   static String studying = 'Studying';
   static String studyingDesc = 'Learn Lessons';
+  static String copy = 'copy';
+  static String reAsk = 'reAsk';
+  static String pin = 'pin';
+  static String share = 'share';
 
 }

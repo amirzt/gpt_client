@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class Conversation {
   String summary;
   String gptModel;
@@ -26,25 +28,32 @@ class Conversation {
 class Message{
   String role;
   int id;
-  String content;
+  RxString content;
   String image;
-  String createdAt;
+  // String createdAt;
 
   Message({
     required this.role,
     required this.id,
-    required this.content,
+    required String stringContent,
     required this.image,
-    required this.createdAt,
-  });
+    // required this.createdAt,
+  }): content = RxString(stringContent);
 
   factory Message.fromJson(Map<String, dynamic> json) {
     return Message(
       role: json['role'],
       id: json['id'],
-      content: json['content'] ?? '',
+      stringContent: json['content'] ?? '',
       image: json['image'] ?? '',
-      createdAt: json['created_at'],
+      // createdAt: json['created_at'],
     );
+  }
+
+  Map<String, dynamic> toJson(){
+    return {
+      'role': role,
+      'content': content.value,
+    };
   }
 }

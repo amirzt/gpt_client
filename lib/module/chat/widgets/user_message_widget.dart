@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
+import 'package:gpt/core/constants.dart';
 import 'package:gpt/data/models/conversation_model.dart';
+import 'package:gpt/module/chat/widgets/message_bottom_widget.dart';
+import 'package:gpt/services/locale_services.dart';
 
 class UserMessageWidget extends GetWidget<GetxController> {
   final Message message;
@@ -10,33 +14,47 @@ class UserMessageWidget extends GetWidget<GetxController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-            bottomLeft: Radius.circular(30),
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 60,
+        right: 10,
+        top: 10,
+      ),
+      child: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30),
+            ),
+            gradient: LinearGradient(
+              colors: [
+                GlobalColors.bubbleGradientStart,
+                GlobalColors.bubbleGradientEnd,
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
-          gradient: LinearGradient(
-            colors: [
-              GlobalColors.bubbleGradientStart,
-              GlobalColors.bubbleGradientEnd,
-            ],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Text(
-                message.content,
-                style: TextStyle(color: GlobalColors.whiteTextColor),
-              ),
-              
-            ],
-          ),
-        ));
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Obx(() => Text(
+                  message.content.value,
+                  textDirection: LocaleServices()
+                      .detectTextDirection(message.content.value),
+                  style: TextStyle(
+                    color: GlobalColors.whiteTextColor,
+                  ),
+                ),),
+
+                const SizedBox(height: 10,),
+                const MessageBottomWidget()
+              ],
+            ),
+          )),
+    );
   }
 }

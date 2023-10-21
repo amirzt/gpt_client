@@ -17,7 +17,9 @@ class HomePage extends GetView<HomeController>{
       body: const Column(
         children: [
           HomeMiddleWidget(),
-          Expanded(child: RecommendedWidget())
+          Expanded(
+              child: RecommendedWidget()
+          )
         ],
       )
     );

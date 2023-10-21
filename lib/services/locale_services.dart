@@ -8,7 +8,7 @@ class LocaleServices{
     // Check language preference
     final locale = Localizations.localeOf(context);
     if (locale.languageCode == 'fa') {
-      print('User prefers Persian language');
+      // print('User prefers Persian language');
       return true;
     }
 
@@ -17,12 +17,17 @@ class LocaleServices{
 
     // Check timezone
     String currentTimeZone = tz.local.name;
-    print('Current timezone: $currentTimeZone');
+    // print('Current timezone: $currentTimeZone');
     if (currentTimeZone.contains('Tehran') || currentTimeZone.contains('Iran')) {
-      print('User is possibly in Iran based on timezone');
+      // print('User is possibly in Iran based on timezone');
       return true;
     }
 
     return false;
+  }
+
+  TextDirection detectTextDirection(String text) {
+    final hasRtlCharacters = RegExp(r'[\u0600-\u06FF\u0750-\u077F]');
+    return hasRtlCharacters.hasMatch(text) ? TextDirection.rtl : TextDirection.ltr;
   }
 }
