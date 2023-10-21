@@ -9,30 +9,20 @@ class TaskController extends GetxController {
 
   var selectedIndex = 0.obs;
 
-  List<Category> categories = [
-    Category(name: 'category', id: 1),
-    Category(name: 'category', id: 1),
-    Category(name: 'category', id: 1),
-    Category(name: 'category', id: 1),
-    Category(name: 'category', id: 1),
-    Category(name: 'category', id: 1),
+  List<Category> categories = [];
+  List<Task> items = [];
 
-  ];
-  List<Task> items = [
-    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
-    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
-    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
-    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
-    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
-    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
-    Task(name: 'books', id: 1, icon: 'assets/icons/studying.png', description: 'Find solutions to math equations.', offline: true, script: 'script'),
-
-  ];
+  @override
+  onInit(){
+    super.onInit();
+    getCategories();
+  }
 
   getCategories() async{
     isCategoryLoading.value = true;
     categories = await ApiProvider().getCategories();
     isCategoryLoading.value = false;
+    getItems();
   }
 
   getItems() async{

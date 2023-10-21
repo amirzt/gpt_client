@@ -1,3 +1,5 @@
+import 'package:gpt/core/urls.dart';
+
 class Category {
   String name;
   int id;
@@ -24,10 +26,10 @@ class Task {
       required this.script});
 
   factory Task.fromJson(Map<String, dynamic> json) => Task(
-      offline: json['offline'],
+      offline: false,
       name: json['name'],
       id: json['id'],
-      icon: json['icon'],
+      icon: Uri(host: GlobalURL.host, scheme: GlobalURL.scheme, port: GlobalURL.port, path: json['icon']).toString(),
       description: json['description'],
       script: json['script']);
 }

@@ -18,8 +18,9 @@ class CategoriesWidget extends GetWidget<TaskController> {
           return GestureDetector(
             child: Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10, right: 10),
-              child: Container(
+              child: Obx(() => Container(
                 // height: 30,
+                width: 80,
                 decoration: BoxDecoration(
                     gradient: controller.selectedIndex.value == index
                         ? LinearGradient(
@@ -48,8 +49,12 @@ class CategoriesWidget extends GetWidget<TaskController> {
                       ),),
                   ),
                 ),
-              ),
+              )),
             ),
+            onTap: (){
+              controller.selectedIndex.value = index;
+              controller.getItems();
+            },
           );
         });
   }

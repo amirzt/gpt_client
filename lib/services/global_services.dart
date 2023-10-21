@@ -66,7 +66,7 @@ class GlobalService{
         uri,
         headers: {
           'Content-Type': 'application/json',
-          HttpHeaders.authorizationHeader: token.toString()
+          // HttpHeaders.authorizationHeader: token.toString()
         },
         body: jsonEncode(body)
     );
