@@ -20,7 +20,7 @@ class Conversation {
       gptModel: json['gpt_model'],
       createdDate: json['created_at'],
       id: json['id'],
-      lastMessage: json['last_message'] ?? '...',
+      lastMessage: json['last_message']['content'] ?? '...',
     );
   }
 }

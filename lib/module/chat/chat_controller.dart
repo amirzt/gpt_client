@@ -5,11 +5,11 @@ import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/provider/api_provider.dart';
 
 class ChatController extends GetxController{
-  Conversation conversation = Conversation(summary: 'summary', gptModel: 'gptModel', createdDate: 'createdDate', lastMessage: 'lastMessage', id: 1);
   var message = ''.obs;
   var gptModel = 'GPT-turbo'.obs;
   TextEditingController textEditingController = TextEditingController();
   RxString textValue = ''.obs;
+  int conversationId = 0 ;
 
   @override
   void onInit() {
@@ -25,32 +25,36 @@ class ChatController extends GetxController{
   RxList<Message> messages = <Message>[].obs;
   var isMessageLoading = false.obs;
 
-  addUserMessage(){
-    messages.insert(0,
+  addUserMessage() async{
+    String content = textValue.value;
+    messages.add(
         Message(
             role: 'user',
             id: 0,
             stringContent: textValue.value,
             image: '',
         ));
+    messages.add(
+        Message(role: 'assistant', id: 0, stringContent: '', image: '')
+    );
     textEditingController.clear();
-    sendMessageToGPT();
-  }
 
-  Future<void> sendMessage() async {
-    // messages.add();
-    // late Message message;
-    await ApiProvider().sendMessageToGPT([]);
+    if(conversationId == 0 ){
+      conversationId = await ApiProvider().createConversation(gptModel.value, content);
+    }else{
+      saveMessageToServer(messages[messages.length-2]);
+    }
+    sendMessageToGPT();
   }
 
   getMessages() async{
     isMessageLoading.value = true;
-    messages.value = await ApiProvider().getMessages(conversation.id);
+    messages.value = await ApiProvider().getMessages(conversationId);
     isMessageLoading.value = false;
   }
 
   saveMessageToServer(Message message) async{
-    await ApiProvider().addMessage(conversation.id, message);
+    ApiProvider().addMessage(conversationId, message);
   }
 
   sendMessageToGPT(){

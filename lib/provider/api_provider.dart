@@ -51,7 +51,7 @@ class ApiProvider {
       prefs.setBool('expired', response['expired']);
       prefs.setString('username', response['username']);
       prefs.setBool('yearly', response['yearly']);
-      prefs.setString('api_key', response['api_key']);
+      // prefs.setString('api_key', response['api_key']);
       List admob = response['admob'];
       for(var i=0 ; i<admob.length ; i++){
         prefs.setString(admob[i]['type'], admob[i]['code']);
@@ -154,12 +154,13 @@ class ApiProvider {
     return messages;
   }
 
-  Future<void> createConversation(String gptModel) async{
+  Future<int> createConversation(String gptModel, String firstQuestion) async{
     String token = await TokenService().getToken();
-    await GlobalService().postRequestMapReturn(
+    Map response = await GlobalService().postRequestMapReturn(
         token,
         GlobalURL.createConversation,
-        {'gpt_model': gptModel});
+        {'gpt_model': gptModel, 'first_question': firstQuestion});
+    return response['id'];
   }
 
   Future<void> updateConversation(int id, String summary) async{
@@ -188,7 +189,7 @@ class ApiProvider {
     if(message.image != ''){
       body['image'] = message.image;
     }else{
-      body['content'] = message.content;
+      body['content'] = message.content.value;
     }
     await GlobalService().postRequestMapReturn(
         token,
@@ -197,7 +198,7 @@ class ApiProvider {
   }
 
   Future<void> sendMessageToGPT(List<Message> messages) async{
-
+    // List<Message> reversedMessage = messages.reversed.toList();
     List<Map<String, dynamic>> jsonMessages = messages.map((message) => message.toJson()).toList();
     const url = 'https://api.openai.com/v1/chat/completions';
 
@@ -211,9 +212,9 @@ class ApiProvider {
       'stream': true,
     });
     ChatController controller = Get.put(ChatController());
-    controller.messages.insert(0,
-        Message(role: 'assistant', id: 0, stringContent: '', image: '')
-    );
+    // controller.messages.add(
+    //     Message(role: 'assistant', id: 0, stringContent: '', image: '')
+    // );
     http.Client client = http.Client();
     http.Request request = http.Request('POST', Uri.parse(url));
     request.body = body;
@@ -232,11 +233,13 @@ class ApiProvider {
         // print(content);
         if(content[0] != 'DONE'){
           if(content['choices'][0]['delta'].containsKey('content')) {
-            controller.messages.first.content.value += content['choices'][0]['delta']['content'];
+            controller.messages.last.content.value += content['choices'][0]['delta']['content'];
             // controller.update();
+          }else{
+            controller.saveMessageToServer(messages.last);
           }
         }else{
-
+          // print('done');
         }
 
 

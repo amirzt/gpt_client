@@ -44,7 +44,7 @@ class RecommendedWidget extends GetWidget<HomeController> {
             alignment: Alignment.bottomCenter,
             child: GestureDetector(
               onTap: () {
-                Get.to(const ChatPage());
+                Get.to(const ChatPage(0));
               },
               child: AbsorbPointer(
                 child: Row(

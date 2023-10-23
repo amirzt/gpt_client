@@ -39,6 +39,12 @@ let x = 16;
   ];
   var isLoading = false.obs;
 
+  @override
+  onInit() {
+    super.onInit();
+    getConversations();
+  }
+
   getConversations() async {
     isLoading.value = true;
     conversations = await ApiProvider().getConversations();

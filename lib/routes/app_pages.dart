@@ -1,5 +1,7 @@
 
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:gpt/module/splash/splash_binding.dart';
+import 'package:gpt/module/splash/splash_page.dart';
 
 import '../module/root/root_binding.dart';
 import '../module/root/root_page.dart';
@@ -12,15 +14,10 @@ class AppPage{
         page: () => const RootPage(),
         binding: RootBinding()
     ),
-    // GetPage(
-    //     name: Routes.setting,
-    //     page: () => const SettingPage(),
-    //     binding: SettingBinding()
-    // ),
-    // GetPage(
-    //     name: Routes.splash,
-    //     page: () => const SplashPage(),
-    //     binding: SplashBinding()
-    // ),
+    GetPage(
+        name: Routes.splash,
+        page: () => const SplashPage(),
+        binding: SplashBinding()
+    ),
   ];
 }

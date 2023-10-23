@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gpt/core/colors.dart';
+import 'package:gpt/global/widgets/progress_indicator.dart';
 import 'package:gpt/module/chat/widgets/chat_item_widget.dart';
 import 'package:gpt/module/history/history_controller.dart';
 
@@ -11,7 +13,9 @@ class HistoryPage extends GetView<HistoryController>{
   Widget build(BuildContext context) {
     Get.put(HistoryController());
     return Scaffold(
-      body: Column(
+      body: Obx(() => controller.isLoading.value
+       ? MyProgressIndicator(GlobalColors.whiteTextColor)
+      : Column(
         children: [
           Expanded(
             child: ListView.builder(
@@ -22,7 +26,7 @@ class HistoryPage extends GetView<HistoryController>{
             ),
           )
         ],
-      )
+      ))
     );
   }
 

@@ -10,6 +10,7 @@ class RootPage extends GetView<RootController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(RootController());
     return SafeArea(
         child: Scaffold(
           backgroundColor: GlobalColors.mainBackgroundColor,

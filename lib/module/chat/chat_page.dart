@@ -9,11 +9,15 @@ import 'package:gpt/module/chat/widgets/model_choice_widget.dart';
 import 'package:gpt/module/chat/widgets/user_message_widget.dart';
 
 class ChatPage extends GetView<ChatController> {
-  const ChatPage({Key? key}) : super(key: key);
+  final int id;
+  const ChatPage(this.id, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Get.put(ChatController());
+    controller.conversationId = id;
+    controller.getMessages();
+
     // controller.sendMessage();
     return SafeArea(
         child: Scaffold
@@ -25,6 +29,7 @@ class ChatPage extends GetView<ChatController> {
                   reverse: true,
                   itemCount: controller.messages.length,
                   itemBuilder: (context, index) {
+                    // int showItem = controller.messages.length - index -1;
                     if(controller.messages[index].role == 'user'){
                       return UserMessageWidget(controller.messages[index]);
                     }else{

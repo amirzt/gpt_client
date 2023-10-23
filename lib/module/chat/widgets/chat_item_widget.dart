@@ -65,7 +65,7 @@ class ChatItemWidget extends StatelessWidget {
                   ],
                 )),
             onTap: (){
-              Get.to(const ChatPage());
+              Get.to(ChatPage(conversation.id));
             },
           )),
     );

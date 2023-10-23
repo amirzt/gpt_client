@@ -8,9 +8,9 @@ class GlobalService{
   Future<List> getRequestListReturn(String? token, Uri uri) async{
     final response =  await http.get(
         uri,
-        // headers: {
-        //   HttpHeaders.authorizationHeader : token.toString()
-        // }
+        headers: {
+          HttpHeaders.authorizationHeader : token.toString()
+        }
     );
     return json.decode(utf8.decode(response.bodyBytes));
   }
@@ -40,9 +40,9 @@ class GlobalService{
   Future<Map> postRequestMapReturn(String? token, Uri uri, Map body) async{
     final response = await http.post(
         uri,
-        // headers: {
-        //   HttpHeaders.authorizationHeader: token.toString(),
-        // },
+        headers: {
+          HttpHeaders.authorizationHeader: token.toString(),
+        },
         body: body
     );
 
@@ -66,7 +66,7 @@ class GlobalService{
         uri,
         headers: {
           'Content-Type': 'application/json',
-          // HttpHeaders.authorizationHeader: token.toString()
+          HttpHeaders.authorizationHeader: token.toString()
         },
         body: jsonEncode(body)
     );

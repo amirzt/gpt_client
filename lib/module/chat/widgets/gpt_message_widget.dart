@@ -1,13 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
 import 'package:gpt/data/models/conversation_model.dart';
+import 'package:gpt/global/widgets/progress_indicator.dart';
 import 'package:gpt/module/chat/chat_controller.dart';
 import 'package:gpt/module/chat/widgets/message_bottom_widget.dart';
 import 'package:gpt/services/locale_services.dart';
 
-class GPTMessageWidget extends GetWidget<ChatController>{
+class GPTMessageWidget extends GetWidget<ChatController> {
   final Message message;
 
   const GPTMessageWidget(this.message, {super.key});
@@ -27,29 +27,28 @@ class GPTMessageWidget extends GetWidget<ChatController>{
                 topRight: Radius.circular(30),
                 bottomRight: Radius.circular(30),
               ),
-              border: Border.all(
-                  width: 1,
-                  color: GlobalColors.borderColor
-              ),
-              color: GlobalColors.divider
-          ),
+              border: Border.all(width: 1, color: GlobalColors.borderColor),
+              color: GlobalColors.divider),
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Obx(() => Text(
-                  message.content.value,
-                  textDirection: LocaleServices()
-                      .detectTextDirection(message.content.value),
-                  style: TextStyle(color: GlobalColors.whiteTextColor),
-                ),),
-                const SizedBox(height: 10,),
+                Obx(() => message.content.value == ''
+                    ? MyProgressIndicator(GlobalColors.whiteTextColor)
+                    : Text(
+                        message.content.value,
+                        textDirection: LocaleServices()
+                            .detectTextDirection(message.content.value),
+                        style: TextStyle(color: GlobalColors.whiteTextColor),
+                      )),
+                const SizedBox(
+                  height: 10,
+                ),
                 const MessageBottomWidget()
               ],
             ),
           )),
     );
   }
-
 }
