@@ -25,5 +25,6 @@ class GlobalStrings{
   static String reAsk = 'reAsk';
   static String pin = 'pin';
   static String share = 'share';
+  static String cropAndRecognize = 'crop and recognize';
 
 }

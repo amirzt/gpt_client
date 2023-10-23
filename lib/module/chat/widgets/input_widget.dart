@@ -1,9 +1,15 @@
+import 'dart:math';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:gpt/core/colors.dart';
 import 'package:gpt/core/constants.dart';
 import 'package:gpt/module/chat/chat_controller.dart';
+import 'package:gpt/module/chat/widgets/scan_text_widget.dart';
 import 'package:gpt/services/locale_services.dart';
+import 'package:image_picker/image_picker.dart';
 
 class InputWidget extends GetWidget<ChatController> {
   const InputWidget({super.key});
@@ -38,7 +44,9 @@ class InputWidget extends GetWidget<ChatController> {
                                 'assets/icons/scan.png',
                                 color: GlobalColors.whiteTextColor,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                openGallery();
+                              },
                             )
                           : null,
                       hintText: GlobalStrings.typeMessageHere,
@@ -74,5 +82,23 @@ class InputWidget extends GetWidget<ChatController> {
                 )))
       ],
     );
+  }
+
+  void openGallery() async{
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      Uint8List imageBytes = await pickedFile.readAsBytes();
+      Get.to(ScanTextWidget(imageBytes));
+    }
+    // final status = await Permission.storage.request();
+    // if (status.isGranted) {
+    //   final picker = ImagePicker();
+    //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    //   if (pickedFile != null) {
+    //     final imagePath = pickedFile.path;
+    //     saveImage(imagePath, type);
+    //   }
+    // }
   }
 }
