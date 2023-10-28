@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:crop_your_image/crop_your_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
@@ -47,7 +48,7 @@ class ScanTextWidget extends GetWidget<ChatController>{
               child: Text(GlobalStrings.cropAndRecognize,
               style: TextStyle(color: GlobalColors.whiteTextColor
               , fontSize: 16,
-              fontWeight: FontWeight.bold),)
+              fontWeight: FontWeight.bold),).tr()
           ),
           const SizedBox(height: 10,)
         ],

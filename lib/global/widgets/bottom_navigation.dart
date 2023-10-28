@@ -19,14 +19,14 @@ class MyBottomNavigation extends GetWidget<RootController> {
       return BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-              label: GlobalStrings.chat,
+              label: tr(GlobalStrings.chat),
               icon: const ImageIcon(
                 AssetImage('assets/icons/chat.png'),
                 size: 28,
               )
           ),
           BottomNavigationBarItem(
-              label: GlobalStrings.task,
+              label: tr(GlobalStrings.task),
               icon: const ImageIcon(
                 AssetImage('assets/icons/task.png'),
                 size: 28,
@@ -41,7 +41,7 @@ class MyBottomNavigation extends GetWidget<RootController> {
           //     ),
           // ),
           BottomNavigationBarItem(
-              label: GlobalStrings.history,
+              label: tr(GlobalStrings.history),
               icon: const ImageIcon(
                 AssetImage('assets/icons/history.png'),
                 size: 28,

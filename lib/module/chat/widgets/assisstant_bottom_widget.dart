@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -42,7 +43,7 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
           label: Text(
             GlobalStrings.copy,
             style: TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
-          ),
+          ).tr(),
           style: style,
         ),
         const SizedBox(
@@ -67,7 +68,7 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
                     GlobalStrings.visualize,
                     style: TextStyle(
                         color: GlobalColors.whiteTextColor, fontSize: 12),
-                  ),
+                  ).tr(),
           ),
           style: style,
         ),
@@ -87,7 +88,7 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
           label: Text(
             GlobalStrings.listen,
             style: TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
-          ),
+          ).tr(),
           style: style,
         ),
         // ElevatedButton.icon(

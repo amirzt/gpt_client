@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
@@ -36,7 +37,7 @@ class SettingsPage extends GetView<SettingsController> {
                         color: GlobalColors.whiteTextColor,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
-                  ),
+                  ).tr(),
                   const Spacer(),
                   IconButton(
                       onPressed: () {
@@ -65,7 +66,7 @@ class SettingsPage extends GetView<SettingsController> {
                         child: Text(
                           GlobalStrings.language,
                           style: textStyle,
-                        ),
+                        ).tr(),
                         onTap: (){
                           controller.changeLanguage(context);
                         },
@@ -81,7 +82,7 @@ class SettingsPage extends GetView<SettingsController> {
                         child: Text(
                           GlobalStrings.copyUsername,
                           style: textStyle,
-                        ),
+                        ).tr(),
                         onTap: (){
                           controller.copyUsername();
                         },
@@ -97,7 +98,7 @@ class SettingsPage extends GetView<SettingsController> {
                         child: Text(
                           GlobalStrings.privacyPolicy,
                           style: textStyle,
-                        ),
+                        ).tr(),
                         onTap: (){
                           controller.changeLanguage(context);
                         },
@@ -113,7 +114,7 @@ class SettingsPage extends GetView<SettingsController> {
                         child: Text(
                           GlobalStrings.contactInfo,
                           style: textStyle,
-                        ),
+                        ).tr(),
                         onTap: (){
                           controller.copyContactInfo();
                         },
@@ -129,7 +130,7 @@ class SettingsPage extends GetView<SettingsController> {
                         child: Text(
                           GlobalStrings.rate,
                           style: textStyle,
-                        ),
+                        ).tr(),
                         onTap: (){
                           controller.rateUs();
                         },

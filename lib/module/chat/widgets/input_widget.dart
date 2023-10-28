@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
@@ -13,6 +14,7 @@ import 'package:gpt/services/locale_services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'dart:ui' as ui;
 
 class InputWidget extends GetWidget<ChatController> {
   const InputWidget({super.key});
@@ -22,7 +24,7 @@ class InputWidget extends GetWidget<ChatController> {
     Get.put(ChatController());
 
     return Row(
-      textDirection: TextDirection.ltr,
+      textDirection: ui.TextDirection.ltr,
       children: [
         const SizedBox(
           width: 20,
@@ -53,7 +55,7 @@ class InputWidget extends GetWidget<ChatController> {
                               },
                             )
                           : null,
-                      hintText: GlobalStrings.typeMessageHere,
+                      hintText: tr(GlobalStrings.typeMessageHere),
                       hintStyle: TextStyle(color: GlobalColors.whiteTextColor),
                       border: InputBorder.none,
                       disabledBorder: InputBorder.none,

@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
@@ -7,6 +8,7 @@ import 'package:gpt/module/chat/chat_page.dart';
 import 'package:gpt/module/home/home_controller.dart';
 import 'package:gpt/module/home/widgets/middle_widget.dart';
 import 'package:gpt/module/home/widgets/recommended_widget.dart';
+import 'dart:ui' as ui;
 
 class HomePage extends GetView<HomeController>{
   const HomePage({super.key});
@@ -28,7 +30,7 @@ class HomePage extends GetView<HomeController>{
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: GlobalColors.whiteTextColor),
-              ),
+              ).tr(),
               const SizedBox(
                 height: 10,
               ),
@@ -51,13 +53,13 @@ class HomePage extends GetView<HomeController>{
               },
               child: AbsorbPointer(
                 child: Row(
-                  textDirection: TextDirection.ltr,
+                  textDirection: ui.TextDirection.ltr,
                   children: [
                     const SizedBox(
                       width: 20,
                     ),
                     Directionality(
-                        textDirection: TextDirection.rtl,
+                        textDirection: ui.TextDirection.rtl,
                         child: Container(
                             width: MediaQuery.of(context).size.width * 0.7,
                             decoration: BoxDecoration(

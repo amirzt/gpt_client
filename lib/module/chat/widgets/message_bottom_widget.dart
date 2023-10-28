@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class MessageBottomWidget extends GetWidget<ChatController>{
             ),
             label: Text(GlobalStrings.copy,
               style: TextStyle(color: GlobalColors.whiteTextColor,
-                  fontSize: 12),),
+                  fontSize: 12),).tr(),
           style: style,
         ),
         const SizedBox( width: 10,),
@@ -51,7 +52,7 @@ class MessageBottomWidget extends GetWidget<ChatController>{
           ),
           label: Text(GlobalStrings.reAsk,
             style: TextStyle(color: GlobalColors.whiteTextColor,
-                fontSize: 12),),
+                fontSize: 12),).tr(),
           style: style,
         ),
         // ElevatedButton.icon(

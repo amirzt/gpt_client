@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
@@ -24,7 +25,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
                     color: GlobalColors.whiteTextColor),
-              ),
+              ).tr(),
               ElevatedButton(
                   onPressed: () {
                     controller.currentIndex.value = 1;
@@ -41,7 +42,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                     fontSize: 14,
                     color: GlobalColors.blueTextColor,
                     fontWeight: FontWeight.bold
-                  ),)
+                  ),).tr()
               )
             ],
           ),
@@ -71,7 +72,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.w700,
                                   color: GlobalColors.whiteTextColor),
-                            ),
+                            ).tr(),
                             const SizedBox(height: 10,),
                             Text(
                               GlobalStrings.socialMediaDesc,
@@ -79,7 +80,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
                                   color: GlobalColors.whiteTextColor),
-                            ),
+                            ).tr(),
                             const Spacer(),
                             Align(
                               alignment: Alignment.centerRight,
@@ -126,7 +127,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w700,
                                                 color: GlobalColors.whiteTextColor),
-                                          ),
+                                          ).tr(),
                                           // const SizedBox(height: 10,),
                                           Text(
                                             GlobalStrings.summaryDesc,
@@ -134,7 +135,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w400,
                                                 color: GlobalColors.whiteTextColor),
-                                          ),
+                                          ).tr(),
                                           const SizedBox(height: 10,),
 
                                         ],
@@ -173,7 +174,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                                               fontSize: 16,
                                               fontWeight: FontWeight.w700,
                                               color: GlobalColors.whiteTextColor),
-                                        ),
+                                        ).tr(),
                                         const SizedBox(height: 10,),
                                         Text(
                                           GlobalStrings.studyingDesc,
@@ -181,7 +182,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                                               fontSize: 16,
                                               fontWeight: FontWeight.w400,
                                               color: GlobalColors.whiteTextColor),
-                                        ),
+                                        ).tr(),
                                         const SizedBox(height: 10,),
 
                                       ],
