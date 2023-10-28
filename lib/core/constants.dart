@@ -28,9 +28,22 @@ class GlobalStrings{
   static String listen = 'listen';
   static String pause = 'pause';
   static String visualize = 'visualize';
+  static String settings = 'Settings';
   static String cropAndRecognize = 'crop and recognize';
   static String socialMediaScript = 'write a short and engaging social media content or post for this topic :';
   static String summaryScript = 'summary this text for me :';
   static String studyScript = 'can you help study this lesson :';
+
+  static String language = 'select language';
+  static String copyUsername = 'copy username';
+  static String privacyPolicy = 'privacy policy';
+  static String contactInfo = 'contact info';
+  static String rate = 'rate';
+  static String rateDesc = 'rateDesc';
+  static String cancel = 'cancel';
+
+  static String english = 'english';
+  static String persian = 'persian';
+
 
 }

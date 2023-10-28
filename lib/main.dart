@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
-      initialRoute: Routes.splash
+      initialRoute: Routes.root
       ,
       getPages: AppPage.pages,
       // title: 'hospital',
