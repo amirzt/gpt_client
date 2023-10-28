@@ -29,23 +29,24 @@ class Message{
   String role;
   int id;
   RxString content;
-  String image;
+  RxString image;
   // String createdAt;
 
   Message({
     required this.role,
     required this.id,
     required String stringContent,
-    required this.image,
+    required String stringImage,
     // required this.createdAt,
-  }): content = RxString(stringContent);
+  }): content = RxString(stringContent),
+   image = RxString(stringImage);
 
   factory Message.fromJson(Map<String, dynamic> json) {
     return Message(
       role: json['role'],
       id: json['id'],
       stringContent: json['content'] ?? '',
-      image: json['image'] ?? '',
+      stringImage: json['image'] ?? '',
       // createdAt: json['created_at'],
     );
   }

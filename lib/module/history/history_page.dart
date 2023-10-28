@@ -15,18 +15,21 @@ class HistoryPage extends GetView<HistoryController>{
     return Scaffold(
       body: Obx(() => controller.isLoading.value
        ? MyProgressIndicator(GlobalColors.whiteTextColor)
-      : Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: controller.conversations.length,
-              itemBuilder: (context, index){
-                return ChatItemWidget(controller.conversations[index]);
-              },
-            ),
-          )
-        ],
-      ))
+      : Directionality(
+          textDirection: TextDirection.rtl,
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: controller.conversations.length,
+                  itemBuilder: (context, index){
+                    return ChatItemWidget(controller.conversations[index]);
+                  },
+                ),
+              )
+            ],
+          ))
+      )
     );
   }
 

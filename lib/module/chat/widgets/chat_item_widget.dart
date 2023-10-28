@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -31,11 +32,12 @@ class ChatItemWidget extends StatelessWidget {
                       color: GlobalColors.whiteTextColor,
                       size: 20,
                     ),
-                    const Spacer(),
-                    Column(
+                    // const Spacer(),
+                    Expanded(child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(conversation.summary,
+                            softWrap: true,
                             textDirection: LocaleServices().detectTextDirection(conversation.lastMessage),
                             style: TextStyle(
                                 color: GlobalColors.whiteTextColor,
@@ -46,6 +48,7 @@ class ChatItemWidget extends StatelessWidget {
                         ),
                         Text(conversation.lastMessage,
                             maxLines: 3,
+                            softWrap: true,
                             textDirection: LocaleServices().detectTextDirection(conversation.lastMessage),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -61,11 +64,12 @@ class ChatItemWidget extends StatelessWidget {
                                 fontSize: 16,
                                 fontWeight: FontWeight.normal))
                       ],
-                    )
+                    ))
                   ],
-                )),
+                )
+            ),
             onTap: (){
-              Get.to(ChatPage(conversation.id));
+              Get.to(ChatPage(conversation.id, false));
             },
           )),
     );

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
 import 'package:gpt/core/constants.dart';
+import 'package:gpt/module/chat/chat_page.dart';
+import 'package:gpt/module/root/root_controller.dart';
 
-class HomeMiddleWidget extends StatelessWidget {
+class HomeMiddleWidget extends GetWidget<RootController> {
   const HomeMiddleWidget({Key? key}) : super(key: key);
 
   @override
@@ -24,7 +27,10 @@ class HomeMiddleWidget extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () {
-
+                    controller.currentIndex.value = 1;
+                    controller.pageController.animateToPage(1,
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.easeOutQuad);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: GlobalColors.darkBlueButtonColor,
@@ -55,34 +61,39 @@ class HomeMiddleWidget extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            GlobalStrings.socialMedia,
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: GlobalColors.whiteTextColor),
-                          ),
-                          const SizedBox(height: 10,),
-                          Text(
-                            GlobalStrings.socialMediaDesc,
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: GlobalColors.whiteTextColor),
-                          ),
-                          const Spacer(),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Image.asset(
-                              'assets/icons/social.png',
-                              width: 48,
-                              height: 49,
+                      child: InkWell(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              GlobalStrings.socialMedia,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                  color: GlobalColors.whiteTextColor),
                             ),
-                          )
-                        ],
+                            const SizedBox(height: 10,),
+                            Text(
+                              GlobalStrings.socialMediaDesc,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  color: GlobalColors.whiteTextColor),
+                            ),
+                            const Spacer(),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Image.asset(
+                                'assets/icons/social.png',
+                                width: 48,
+                                height: 49,
+                              ),
+                            )
+                          ],
+                        ),
+                        onTap: (){
+                          Get.to(ChatPage(0, false,script: GlobalStrings.socialMediaScript));
+                        },
                       ),
                     ),
                   ),
@@ -101,35 +112,40 @@ class HomeMiddleWidget extends StatelessWidget {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Text(
-                                          GlobalStrings.summary,
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w700,
-                                              color: GlobalColors.whiteTextColor),
-                                        ),
-                                        // const SizedBox(height: 10,),
-                                        Text(
-                                          GlobalStrings.summaryDesc,
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                              color: GlobalColors.whiteTextColor),
-                                        ),
-                                        const SizedBox(height: 10,),
+                                child: InkWell(
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text(
+                                            GlobalStrings.summary,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w700,
+                                                color: GlobalColors.whiteTextColor),
+                                          ),
+                                          // const SizedBox(height: 10,),
+                                          Text(
+                                            GlobalStrings.summaryDesc,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                                color: GlobalColors.whiteTextColor),
+                                          ),
+                                          const SizedBox(height: 10,),
 
-                                      ],
-                                    ),
-                                    const Spacer(),
-                                    Image.asset('assets/icons/summary.png')
-                                  ],
+                                        ],
+                                      ),
+                                      const Spacer(),
+                                      Image.asset('assets/icons/summary.png')
+                                    ],
+                                  ),
+                                  onTap: (){
+                                    Get.to(ChatPage(0, false,script: GlobalStrings.summaryScript));
+                                  },
                                 ),
                               )
                           ),
@@ -144,12 +160,13 @@ class HomeMiddleWidget extends StatelessWidget {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,                                      children: [
+                                child: InkWell(
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,                                      children: [
                                         Text(
                                           GlobalStrings.studying,
                                           style: TextStyle(
@@ -168,10 +185,14 @@ class HomeMiddleWidget extends StatelessWidget {
                                         const SizedBox(height: 10,),
 
                                       ],
-                                    ),
-                                    const Spacer(),
-                                    Image.asset('assets/icons/studying.png')
-                                  ],
+                                      ),
+                                      const Spacer(),
+                                      Image.asset('assets/icons/studying.png')
+                                    ],
+                                  ),
+                                  onTap: (){
+                                    Get.to(ChatPage(0,false ,script: GlobalStrings.studyScript));
+                                  },
                                 ),
                               )
                           ),

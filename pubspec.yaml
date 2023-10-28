@@ -27,6 +27,9 @@ dependencies:
   speech_to_text: ^6.3.0
   crop_your_image: ^0.7.5
   path_provider: ^2.1.1
+  lottie: ^2.6.0
+  flutter_tts: ^3.8.3
+#  share_plus: ^7.1.0
 
   cupertino_icons: ^1.0.2
 
@@ -43,8 +46,12 @@ flutter:
   assets:
     - assets/icons/
     - assets/translations/
+    - assets/animations/
 
   fonts:
     - family: IRANSansX
       fonts:
         - asset: assets/fonts/IRANSansXFaNum-Regular.otf
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf

@@ -4,6 +4,7 @@ import 'package:gpt/core/colors.dart';
 import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/global/widgets/progress_indicator.dart';
 import 'package:gpt/module/chat/chat_controller.dart';
+import 'package:gpt/module/chat/widgets/assisstant_bottom_widget.dart';
 import 'package:gpt/module/chat/widgets/message_bottom_widget.dart';
 import 'package:gpt/services/locale_services.dart';
 
@@ -45,7 +46,12 @@ class GPTMessageWidget extends GetWidget<ChatController> {
                 const SizedBox(
                   height: 10,
                 ),
-                const MessageBottomWidget()
+                AssistantBottomWidget(message),
+                Obx(() =>
+                message.image.value != ''
+                    ? Image.network(message.image.value)
+                    : Container()
+                )
               ],
             ),
           )),

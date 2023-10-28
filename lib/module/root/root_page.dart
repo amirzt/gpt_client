@@ -12,14 +12,17 @@ class RootPage extends GetView<RootController> {
   Widget build(BuildContext context) {
     Get.put(RootController());
     return SafeArea(
-        child: Scaffold(
-          backgroundColor: GlobalColors.mainBackgroundColor,
-            appBar: const GlobalAppBar(),
-            bottomNavigationBar: const MyBottomNavigation(),
-            body: PageView(
-              controller: controller.pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              children: controller.pages,
-            )));
+        child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Scaffold(
+                backgroundColor: GlobalColors.mainBackgroundColor,
+                appBar: const GlobalAppBar(),
+                bottomNavigationBar: const MyBottomNavigation(),
+                body: PageView(
+                  controller: controller.pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: controller.pages,
+                )))
+    );
   }
 }

@@ -25,6 +25,12 @@ class GlobalStrings{
   static String reAsk = 'reAsk';
   static String pin = 'pin';
   static String share = 'share';
+  static String listen = 'listen';
+  static String pause = 'pause';
+  static String visualize = 'visualize';
   static String cropAndRecognize = 'crop and recognize';
+  static String socialMediaScript = 'write a short and engaging social media content or post for this topic :';
+  static String summaryScript = 'summary this text for me :';
+  static String studyScript = 'can you help study this lesson :';
 
 }

@@ -51,7 +51,7 @@ class UserMessageWidget extends GetWidget<GetxController> {
                 ),),
 
                 const SizedBox(height: 10,),
-                const MessageBottomWidget()
+                MessageBottomWidget(message)
               ],
             ),
           )),

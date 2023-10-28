@@ -197,7 +197,7 @@ class ApiProvider {
         body);
   }
 
-  Future<void> sendMessageToGPT(List<Message> messages) async{
+  Future<void> sendMessageToGPT(List<Message> messages, String model) async{
     // List<Message> reversedMessage = messages.reversed.toList();
     List<Map<String, dynamic>> jsonMessages = messages.map((message) => message.toJson()).toList();
     const url = 'https://api.openai.com/v1/chat/completions';
@@ -208,7 +208,7 @@ class ApiProvider {
     };
     final body = json.encode({
       'messages': jsonMessages,
-      "model": "gpt-3.5-turbo",
+      "model": model,
       'stream': true,
     });
     ChatController controller = Get.put(ChatController());
@@ -234,8 +234,10 @@ class ApiProvider {
         if(content[0] != 'DONE'){
           if(content['choices'][0]['delta'].containsKey('content')) {
             controller.messages.last.content.value += content['choices'][0]['delta']['content'];
+            controller.scrollToLast(0);
             // controller.update();
           }else{
+            controller.isMessageLoading.value = false;
             controller.saveMessageToServer(messages.last);
           }
         }else{
@@ -252,4 +254,30 @@ class ApiProvider {
 
   }
 
+  Future<void> visualize(String prompt) async{
+    final headers = {
+      'Authorization': 'Bearer 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',
+      'Content-Type': 'application/json',
+    };
+
+    const url = 'https://api.openai.com/v1/images/generations';
+
+    final body = json.encode({
+      'prompt': prompt,
+      "n": 1,
+      "size": "512x512"
+    });
+
+    final response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: body
+    );
+
+    ChatController controller = Get.put(ChatController());
+    Map map = json.decode(utf8.decode(response.bodyBytes));
+    controller.messages.last.image.value =map['data'][0]['url'];
+    controller.isVisualizeLoading.value = false;
+    // controller.scrollToLast(2);
+  }
 }

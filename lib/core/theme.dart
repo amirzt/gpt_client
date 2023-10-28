@@ -43,12 +43,12 @@ class ThemeConfig {
       titleSmall: TextStyle(fontSize: 12),
       titleLarge: TextStyle(fontSize: 14),
     ).apply(
-      fontFamily: 'IRANSansX',
+      fontFamily: 'Inter',
     );
 
     return ThemeData(
       useMaterial3: true,
-      fontFamily: 'IRANSansX',
+      fontFamily: 'Inter',
       textTheme: myTextTheme,
       canvasColor: background,
       cardColor: cardBackground,
@@ -81,14 +81,14 @@ class ThemeConfig {
         toolbarTextStyle: TextTheme(
           bodyLarge: baseTextTheme.bodyLarge!.copyWith(
             color: secondaryText,
-            fontFamily: 'IRANSans',
+            fontFamily: 'Inter',
             fontSize: 18,
           ),
         ).bodyMedium,
         titleTextStyle: TextTheme(
           bodyLarge: baseTextTheme.bodyLarge!.copyWith(
             color: secondaryText,
-            fontFamily: 'IRANSans',
+            fontFamily: 'Inter',
             fontSize: 18,
           ),
         ).titleLarge,
@@ -107,19 +107,19 @@ class ThemeConfig {
         labelStyle: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 14,
-          fontFamily: 'IRANSans',
+          fontFamily: 'Inter',
           color: primaryText,
         ),
         hintStyle: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 14,
-          fontFamily: 'IRANSans',
+          fontFamily: 'Inter',
           color: primaryText.withOpacity(0.8),
         ),
         errorStyle: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 12,
-          fontFamily: 'IRANSans',
+          fontFamily: 'Inter',
           color: error,
         ),
         enabledBorder: UnderlineInputBorder(
