@@ -98,7 +98,7 @@ class HomePage extends GetView<HomeController>{
             alignment: Alignment.bottomCenter,
             child: GestureDetector(
               onTap: () {
-                Get.to(const ChatPage(0, false));
+                Get.to(ChatPage(0, false));
               },
               child: AbsorbPointer(
                 child: Row(

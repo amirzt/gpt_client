@@ -33,7 +33,7 @@ class ShopController extends GetxController{
     isLoading.value = true;
     String url = await ApiProvider().getZarinpalUrl(plans[selectedIndex.value].id);
     // url = "/api/shop/request/";
-    Uri uri = Uri.https(GlobalURL.host, '/api/shop/request/',parseQueryString(url.substring(1)) );
+    Uri uri = Uri.http('193.36.84.224:8001', '/api/shop/request/',parseQueryString(url.substring(1)) );
     launchUrl(
         uri,
         mode: LaunchMode.externalApplication

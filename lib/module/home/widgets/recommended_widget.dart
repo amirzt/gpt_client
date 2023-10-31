@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -50,7 +51,8 @@ class RecommendedItem extends StatelessWidget {
                                   fontSize: 16,
                                   color: GlobalColors.blueTextColor,
                                   fontWeight: FontWeight.bold),
-                            )),
+                            ).tr()
+                        ),
                         const SizedBox(width: 6,),
                         Icon(
                           FontAwesomeIcons.chevronRight,

@@ -51,30 +51,6 @@ class ShopPage extends GetView<ShopController>{
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: GlobalColors.primaryColor,
-                        fixedSize: Size(
-                            MediaQuery.of(context).size.width * 0.6,
-                            65),
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20))
-                        )
-                    ),
-                    onPressed: () {  },
-                    child: Text(GlobalStrings.buy,
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: GlobalColors.whiteTextColor,
-                          fontWeight: FontWeight.w700
-                      ),),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
                 child: Obx(() => controller.isLoading.value ?
                 Center(
                   child: MyProgressIndicator(GlobalColors.whiteTextColor),
@@ -120,8 +96,9 @@ class ShopPage extends GetView<ShopController>{
                                     ),
                                     Text(
                                       GlobalStrings.price,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           fontWeight: FontWeight.bold,
+                                          color: GlobalColors.whiteTextColor,
                                           fontSize: 15),
                                     ).tr(),
                                     const SizedBox(
@@ -148,7 +125,33 @@ class ShopPage extends GetView<ShopController>{
                         );
                       }),
                 ),)
-              )
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: GlobalColors.primaryColor,
+                        fixedSize: Size(
+                            MediaQuery.of(context).size.width * 0.6,
+                            65),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(20))
+                        )
+                    ),
+                    onPressed: () {
+                      controller.getZarinpalUrl();
+                    },
+                    child: Text(GlobalStrings.buy,
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: GlobalColors.whiteTextColor,
+                          fontWeight: FontWeight.w700
+                      ),),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

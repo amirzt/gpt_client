@@ -67,5 +67,7 @@
   "savedToGalley": "saved in gallery",
   "upgrade": "upgrade your account",
   "limitMessage": "Sorry but you have reached the limit of 10 free messages for GPT-Turbo. get a subsription to unlock the model’s full pontential!",
-  "goLimitless": "Go Limitless!"
+  "goLimitless": "Go Limitless!",
+  "update": "Update",
+  "updateDesc": "new Version is available. please update to continue using the app"
 }

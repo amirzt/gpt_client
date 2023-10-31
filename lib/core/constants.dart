@@ -71,5 +71,7 @@ class GlobalStrings{
   static String price= 'ریال';
   static String limitMessage= 'limitMessage';
   static String goLimitless= 'goLimitless';
+  static String update= 'update';
+  static String updateDesc= 'updateDesc';
 
 }

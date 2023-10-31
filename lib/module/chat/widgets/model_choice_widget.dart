@@ -53,10 +53,16 @@ class ModelChoiceWidget extends GetWidget<ChatController> {
                         : const BoxDecoration(),
                     child: InkWell(
                       onTap: () {
-                        controller.gptModel.value = 'GPT4';
+                        if(controller.isExpired.value){
+                          Get.snackbar('upgrade', 'upgrade to use gpt4',
+                          colorText: GlobalColors.whiteTextColor);
+                        }else{
+                          controller.gptModel.value = 'GPT4';
+                        }
                       },
                       child: Center(
-                        child: Row(
+                        child: Obx(() => controller.isExpired.value
+                         ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset('assets/icons/lock.png'),
@@ -69,7 +75,19 @@ class ModelChoiceWidget extends GetWidget<ChatController> {
                                   fontWeight: FontWeight.bold),
                             ),
                           ],
-                        ),
+                        )
+                        : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'GPT4',
+                              style: TextStyle(
+                                  color: GlobalColors.whiteTextColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )),
                       ),
                     ),
                   ),

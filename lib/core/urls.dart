@@ -12,6 +12,7 @@ class GlobalURL{
   // user
   static Uri loginUri = Uri(scheme: scheme,port: port, host: host, path: '/api/users/login/');
   static Uri splashUri = Uri(scheme: scheme,port: port, host: host, path: '/api/users/splash/');
+  static Uri appVersion = Uri(scheme: scheme,port: port, host: host, path: '/api/users/get_app_version/');
 
   // support
   static Uri getInstagram = Uri(scheme: scheme,port: port, host: host, path: '/api/support/get_instagram/');
@@ -34,6 +35,7 @@ class GlobalURL{
   static Uri addMessage = Uri(scheme: scheme, port: port,host: host, path: '/api/conversation/add_message/');
   static Uri getMessage = Uri(scheme: scheme, port: port,host: host, path: '/api/conversation/get_message/');
   static Uri updateMessage = Uri(scheme: scheme, port: port,host: host, path: '/api/conversation/update_message/');
+  static Uri sendToGpt = Uri(scheme: scheme, port: port,host: host, path: '/api/conversation/send_message_to_gpt/');
 
   // items
   static Uri getItems = Uri(scheme: scheme,port: port, host: host, path: '/api/items/get_items/');

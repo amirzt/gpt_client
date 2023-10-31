@@ -26,33 +26,33 @@ class SplashController extends GetxController with GetSingleTickerProviderStateM
   }
 
   void getUserInfo() async{
-    bool success = await ApiProvider().login();
-    if(success){
-      Get.off(const RootPage(true));
-    }else{
-      Get.off(const RootPage(false));
-    }
+    // bool success = await ApiProvider().login();
+    // if(success){
+    //   Get.off(const RootPage(true));
+    // }else{
+    //   Get.off(const RootPage(false));
+    // }
 
     // Future.delayed(const Duration(seconds: 1), () {
     //   Get.to(const RootPage());
     // });
     // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // try{
-    //   if(prefs.containsKey('Token')){
-    //     bool success = await ApiProvider().login();
-    //     if(success){
-    //       Get.off(const RootPage(true));
-    //     }else{
-    //       Get.off(const RootPage(false));
-    //     }
-    //   }else{
-    //     await ApiProvider().login();
-    //     Get.off(const FirstInitialPage());
-    //   }
-    // }catch(e){
-    //   Get.offNamed(Routes.initial);
-    // }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try{
+      if(prefs.containsKey('Token')){
+        bool success = await ApiProvider().login();
+        if(success){
+          Get.off(const RootPage(true));
+        }else{
+          Get.off(const RootPage(false));
+        }
+      }else{
+        await ApiProvider().login();
+        Get.off(FirstInitialPage());
+      }
+    }catch(e){
+      Get.off(const RootPage(false));
+    }
     // isBottomVisible.value = false;
     // animationController.addStatusListener((status) {
     //   if(status == AnimationStatus.completed){

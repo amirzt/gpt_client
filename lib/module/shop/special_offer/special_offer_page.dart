@@ -83,7 +83,9 @@ class SpecialOfferPage extends GetView<SpecialOfferController>{
                         borderRadius: BorderRadius.all(Radius.circular(20))
                       )
                     ),
-                    onPressed: () {  },
+                    onPressed: () {
+                      controller.getZarinpalUrl(plan.id);
+                    },
                     child: Text(GlobalStrings.getLifeTimePro,
                     style: TextStyle(
                       fontSize: 16,

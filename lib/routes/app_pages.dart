@@ -1,5 +1,7 @@
 
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:gpt/module/chat/chat_bindings.dart';
+import 'package:gpt/module/chat/chat_page.dart';
 import 'package:gpt/module/first_initial/bindings.dart';
 import 'package:gpt/module/first_initial/first_initial_page.dart';
 import 'package:gpt/module/splash/splash_binding.dart';
@@ -23,8 +25,13 @@ class AppPage{
     ),
     GetPage(
         name: Routes.initial,
-        page: () => const FirstInitialPage(),
+        page: () => FirstInitialPage(),
         binding: FirstInitialBindings()
+    ),
+    GetPage(
+        name: Routes.chat,
+        page: () => ChatPage(0, false),
+        binding: ChatBinding()
     ),
   ];
 }

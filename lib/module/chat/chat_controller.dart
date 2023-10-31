@@ -19,6 +19,7 @@ class ChatController extends GetxController {
   var isVisualizeLoading = false.obs;
   FlutterTts flutterTts = FlutterTts();
   var limitReached = false.obs;
+  var isExpired = true.obs;
 
   @override
   void onInit() {
@@ -101,6 +102,7 @@ class ChatController extends GetxController {
   void getLimit() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool expired = prefs.getBool('expired') ?? true;
+    isExpired.value = expired;
     if(expired){
       limitReached.value = prefs.getBool('limit_reached') ?? false;
     }else{
