@@ -6,7 +6,7 @@ class GlobalColors {
   static Color thirdBackgroundColor = const Color.fromARGB(255, 32, 36, 45);
   static Color divider = const Color.fromARGB(255, 68, 81, 103);
 
-  static Color primaryColor = const Color.fromARGB(255, 39, 136, 255);
+  static Color primaryColor = const Color.fromARGB(128, 39, 136, 255);
   static Color complementaryColor = const Color.fromARGB(255, 39, 255, 216);
   static Color grey = const Color.fromARGB(255, 72, 72, 72);
 

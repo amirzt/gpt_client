@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:gpt/core/colors.dart';
 import 'package:gpt/core/constants.dart';
+import 'package:gpt/global/widgets/progress_indicator.dart';
 import 'package:gpt/module/chat/chat_controller.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -36,20 +37,23 @@ class ScanTextWidget extends GetWidget<ChatController>{
             ),
           ),
           const Spacer(),
-          ElevatedButton(
+          Obx(() => controller.isCropping.value ?
+          MyProgressIndicator(GlobalColors.whiteTextColor, size: 25,)
+          : ElevatedButton(
               onPressed: (){
+                controller.isCropping.value = true;
                 cropController.crop();
                 // recognizeText(cropController.);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: GlobalColors.bubbleGradientEnd,
-                fixedSize: Size(MediaQuery.of(context).size.width * 0.6, 50)
+                  backgroundColor: GlobalColors.bubbleGradientEnd,
+                  fixedSize: Size(MediaQuery.of(context).size.width * 0.6, 50)
               ),
               child: Text(GlobalStrings.cropAndRecognize,
-              style: TextStyle(color: GlobalColors.whiteTextColor
-              , fontSize: 16,
-              fontWeight: FontWeight.bold),).tr()
-          ),
+                style: TextStyle(color: GlobalColors.whiteTextColor
+                    , fontSize: 16,
+                    fontWeight: FontWeight.bold),).tr()
+          ),),
           const SizedBox(height: 10,)
         ],
       ),
@@ -69,6 +73,8 @@ class ScanTextWidget extends GetWidget<ChatController>{
 
     String text = recognizedText.text;
     controller.textEditingController.text = text;
+    controller.isCropping.value = false;
+
     Get.back();
     // controller.textEditingController.text = text;
     // for (TextBlock block in recognizedText.blocks) {

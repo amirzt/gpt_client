@@ -50,12 +50,20 @@ class ApiProvider {
       prefs.setString('Token', response['token']);
       prefs.setBool('expired', response['expired']);
       prefs.setString('username', response['username']);
-      prefs.setBool('yearly', response['yearly']);
-      // prefs.setString('api_key', response['api_key']);
-      List admob = response['admob'];
-      for(var i=0 ; i<admob.length ; i++){
-        prefs.setString(admob[i]['type'], admob[i]['code']);
+      prefs.setBool('limit_reached', response['limit_reached']);
+
+      List apikey = response['api_key'];
+      List<String> strings = [];
+      for(var i=0 ; i<apikey.length ; i++){
+        strings.add(apikey[i]['key']);
       }
+      prefs.setStringList('api_key', strings);
+
+      // prefs.setString('api_key', response['api_key']);
+      // List admob = response['admob'];
+      // for(var i=0 ; i<admob.length ; i++){
+      //   prefs.setString(admob[i]['type'], admob[i]['code']);
+      // }
       return true;
     }else{
       return false;
@@ -186,12 +194,14 @@ class ApiProvider {
       'conversation': conversation.toString(),
       'role': message.role,
     };
-    if(message.image != ''){
+    if(message.image.value != ''){
       body['image'] = message.image;
     }else{
-      body['content'] = message.content.value;
+      body['content'] = message.content.value.length > 999 ?
+      message.content.value.substring(0 ,999)
+       : message.content.value;
     }
-    await GlobalService().postRequestMapReturn(
+    await GlobalService().postRequestIntReturn(
         token,
         GlobalURL.addMessage,
         body);
@@ -229,19 +239,16 @@ class ApiProvider {
         // The event will be of type http.StreamedResponse
         // You can extract data using event.stream or event.stream.bytesToString()
         // print('1');
+        // print(utf8.decode(event));
         Map content = json.decode(utf8.decode(event).split('data: ')[1]);
         // print(content);
-        if(content[0] != 'DONE'){
-          if(content['choices'][0]['delta'].containsKey('content')) {
-            controller.messages.last.content.value += content['choices'][0]['delta']['content'];
-            controller.scrollToLast(0);
-            // controller.update();
-          }else{
-            controller.isMessageLoading.value = false;
-            controller.saveMessageToServer(messages.last);
-          }
+        if(content['choices'][0]['delta'].containsKey('content')) {
+          controller.messages.last.content.value += content['choices'][0]['delta']['content'];
+          controller.scrollToLast(0);
+          // controller.update();
         }else{
-          // print('done');
+          controller.isMessageLoading.value = false;
+          controller.saveMessageToServer(messages.last);
         }
 
 
@@ -278,6 +285,27 @@ class ApiProvider {
     Map map = json.decode(utf8.decode(response.bodyBytes));
     controller.messages.last.image.value =map['data'][0]['url'];
     controller.isVisualizeLoading.value = false;
+    updateMessage(controller.conversationId, map['data'][0]['url']);
     // controller.scrollToLast(2);
+  }
+
+
+  Future<Plan> getSpecialPlans(Uri uri, Map body) async{
+    String token = await TokenService().getToken();
+    List response = await GlobalService().postRequestListReturn(token, uri, body);
+    Plan plan = Plan.fromJson(response[0]);
+    return plan;
+  }
+
+  Future<void> updateMessage(int conversation, String image) async{
+    String token = await TokenService().getToken();
+    Map body = {
+      'conversation': conversation.toString(),
+      'image': image,
+    };
+    await GlobalService().postRequestIntReturn(
+        token,
+        GlobalURL.updateMessage,
+        body);
   }
 }

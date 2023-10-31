@@ -3,10 +3,13 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/provider/api_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatController extends GetxController {
   var message = ''.obs;
   var gptModel = 'GPT-turbo'.obs;
+  var isSpeaking = false.obs;
+  var isCropping = false.obs;
   TextEditingController textEditingController = TextEditingController();
   RxString textValue = ''.obs;
   int conversationId = 0;
@@ -15,6 +18,7 @@ class ChatController extends GetxController {
   var isScreenLoading = false.obs;
   var isVisualizeLoading = false.obs;
   FlutterTts flutterTts = FlutterTts();
+  var limitReached = false.obs;
 
   @override
   void onInit() {
@@ -23,17 +27,10 @@ class ChatController extends GetxController {
     textEditingController.addListener(() {
       textValue.value = textEditingController.text;
     });
+    getLimit();
     // conversation = Get.arguments as Conversation;
     // getMessages();
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-    flutterTts.pause();
-    flutterTts.stop();
-  }
-
 
 
   RxList<Message> messages = <Message>[].obs;
@@ -96,8 +93,18 @@ class ChatController extends GetxController {
 
   void visualize() async {
     isVisualizeLoading.value = true;
-    ApiProvider().visualize(messages.last.content.value.length > 1000
-        ? messages.last.content.value.substring(0, 1000)
+    ApiProvider().visualize(messages.last.content.value.length > 999
+        ? messages.last.content.value.substring(0, 999)
         : messages.last.content.value);
+  }
+
+  void getLimit() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool expired = prefs.getBool('expired') ?? true;
+    if(expired){
+      limitReached.value = prefs.getBool('limit_reached') ?? false;
+    }else{
+      limitReached.value = false;
+    }
   }
 }

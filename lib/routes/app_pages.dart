@@ -13,7 +13,7 @@ class AppPage{
   static final pages = [
     GetPage(
         name: Routes.root,
-        page: () => const RootPage(),
+        page: () => const RootPage(true),
         binding: RootBinding()
     ),
     GetPage(

@@ -8,7 +8,10 @@ import 'package:gpt/module/chat/chat_page.dart';
 import 'package:gpt/module/home/home_controller.dart';
 import 'package:gpt/module/home/widgets/middle_widget.dart';
 import 'package:gpt/module/home/widgets/recommended_widget.dart';
+import 'package:gpt/module/shop/plans/shop_page.dart';
 import 'dart:ui' as ui;
+
+import 'package:gpt/module/shop/special_offer/special_offer_page.dart';
 
 class HomePage extends GetView<HomeController>{
   const HomePage({super.key});
@@ -23,6 +26,52 @@ class HomePage extends GetView<HomeController>{
           SingleChildScrollView(
           child:  Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: InkWell(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      image: DecorationImage(
+                          image: AssetImage('assets/icons/buy_background.png'),
+                          fit: BoxFit.fill
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Row(
+
+                        children: [
+                          Image.asset('assets/icons/gift.png'),
+                          const SizedBox(width: 20,),
+                          Column(
+                            children: [
+                              Text(GlobalStrings.specialOffer,
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w700,
+                                    color: GlobalColors.whiteTextColor
+                                ),).tr(),
+                              const SizedBox(height: 10,),
+                              Text(GlobalStrings.specialOfferDesc,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: GlobalColors.whiteTextColor
+                                  )
+                              ).tr()
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  onTap: (){
+                    Get.to(SpecialOfferPage(controller.plan));
+                  },
+                ),
+
+              ),
               const HomeMiddleWidget(),
               Text(
                 GlobalStrings.recommendedTasks,

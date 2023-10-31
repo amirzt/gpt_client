@@ -9,6 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsController extends GetxController {
   String contactInfo = "contactInfo";
+  var selectedLanguage = 0.obs;
+
 
   @override
   void onInit() {

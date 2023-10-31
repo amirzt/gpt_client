@@ -33,6 +33,7 @@ class GlobalURL{
   static Uri deleteConversation = Uri(scheme: scheme,port: port, host: host, path: '/api/conversation/delete_conversation/');
   static Uri addMessage = Uri(scheme: scheme, port: port,host: host, path: '/api/conversation/add_message/');
   static Uri getMessage = Uri(scheme: scheme, port: port,host: host, path: '/api/conversation/get_message/');
+  static Uri updateMessage = Uri(scheme: scheme, port: port,host: host, path: '/api/conversation/update_message/');
 
   // items
   static Uri getItems = Uri(scheme: scheme,port: port, host: host, path: '/api/items/get_items/');

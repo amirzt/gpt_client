@@ -28,7 +28,12 @@ class ChatPage extends GetView<ChatController> {
     controller.getMessages();
     addTaskMessage();
     // controller.sendMessage();
-    return SafeArea(
+    return WillPopScope(
+        onWillPop: () async{
+          controller.flutterTts.stop();
+          return true;
+        },
+        child: SafeArea(
         child: Scaffold
           (body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,27 +42,27 @@ class ChatPage extends GetView<ChatController> {
           children: [
             const ModelChoiceWidget(),
             Obx(() => Expanded(
-              child: controller.isScreenLoading.value ?
-              MyProgressIndicator(GlobalColors.whiteTextColor)
-                  : ListView.builder(
-                // reverse: true,
-                  controller: controller.scrollController,
-                  // controller: scrollController,
-                  itemCount: controller.messages.length,
-                  itemBuilder: (context, index) {
-                    if(controller.messages[index].role == 'user'){
-                      return UserMessageWidget(controller.messages[index]);
-                    }else{
-                      return GPTMessageWidget(controller.messages[index]);
-                    }
-                  })
+                child: controller.isScreenLoading.value ?
+                MyProgressIndicator(GlobalColors.whiteTextColor)
+                    : ListView.builder(
+                  // reverse: true,
+                    controller: controller.scrollController,
+                    // controller: scrollController,
+                    itemCount: controller.messages.length,
+                    itemBuilder: (context, index) {
+                      if(controller.messages[index].role == 'user'){
+                        return UserMessageWidget(controller.messages[index]);
+                      }else{
+                        return GPTMessageWidget(controller.messages[index]);
+                      }
+                    })
             )),
             const SizedBox(height: 10,),
             const InputWidget()
           ],
         )
         )
-    );
+    ));
   }
 
   void addTaskMessage() async{

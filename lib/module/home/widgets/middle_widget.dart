@@ -93,7 +93,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                           ],
                         ),
                         onTap: (){
-                          Get.to(ChatPage(0, false,script: GlobalStrings.socialMediaScript));
+                          Get.to(ChatPage(0, false,script: tr(GlobalStrings.socialMediaScript)));
                         },
                       ),
                     ),
@@ -145,7 +145,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                                     ],
                                   ),
                                   onTap: (){
-                                    Get.to(ChatPage(0, false,script: GlobalStrings.summaryScript));
+                                    Get.to(ChatPage(0, false,script: tr(GlobalStrings.summaryScript)));
                                   },
                                 ),
                               )
@@ -192,7 +192,7 @@ class HomeMiddleWidget extends GetWidget<RootController> {
                                     ],
                                   ),
                                   onTap: (){
-                                    Get.to(ChatPage(0,false ,script: GlobalStrings.studyScript));
+                                    Get.to(ChatPage(0,false ,script:tr(GlobalStrings.studyScript)));
                                   },
                                 ),
                               )

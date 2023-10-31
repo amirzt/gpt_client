@@ -17,6 +17,7 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
 
   @override
   Widget build(BuildContext context) {
+
     ButtonStyle style = ElevatedButton.styleFrom(
       backgroundColor: Colors.grey.shade200.withOpacity(0.3),
       // Semi-transparent background
@@ -58,18 +59,11 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
             color: GlobalColors.whiteTextColor,
             size: 16,
           ),
-          label: Obx(
-            () => controller.isVisualizeLoading.value
-                ? MyProgressIndicator(
-                    GlobalColors.whiteTextColor,
-                    size: 10,
-                  )
-                : Text(
-                    GlobalStrings.visualize,
-                    style: TextStyle(
-                        color: GlobalColors.whiteTextColor, fontSize: 12),
-                  ).tr(),
-          ),
+          label: Text(
+            GlobalStrings.visualize,
+            style: TextStyle(
+                color: GlobalColors.whiteTextColor, fontSize: 12),
+          ).tr(),
           style: style,
         ),
         const SizedBox(
@@ -78,17 +72,22 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
 
         ElevatedButton.icon(
           onPressed: () {
-            startVoice();
+            if(controller.isSpeaking.value){
+              controller.flutterTts.pause();
+              controller.isSpeaking.value = false;
+            }else{
+              startVoice();
+            }
           },
           icon: Icon(
             Icons.keyboard_voice,
             color: GlobalColors.whiteTextColor,
             size: 16,
           ),
-          label: Text(
-            GlobalStrings.listen,
+          label: Obx(() => Text(
+            controller.isSpeaking.value ? GlobalStrings.pause :GlobalStrings.listen,
             style: TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
-          ).tr(),
+          ).tr(),),
           style: style,
         ),
         // ElevatedButton.icon(
@@ -109,6 +108,7 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
   }
 
   void startVoice() async {
+    controller.isSpeaking.value = true;
     controller.flutterTts.speak(message.content.value);
   }
 }

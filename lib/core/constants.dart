@@ -33,6 +33,7 @@ class GlobalStrings{
   static String summaryScript = 'summaryScript';
   static String studyScript = 'studyScript';
   static String language = 'language';
+  static String upgrade = 'upgrade';
   static String copyUsername = 'copyUsername';
   static String privacyPolicy = 'privacyPolicy';
   static String contactInfo = 'contactInfo';
@@ -42,6 +43,33 @@ class GlobalStrings{
   static String english = 'english';
   static String persian = 'persian';
   static String error = 'error';
+  static String specialOffer = 'specialOffer';
+  static String specialOfferDesc = 'specialOfferDesc';
 
+  static String unlockLifeTime = 'unlockLifeTime';
+  static String fastProcessing = 'fastProcessing';
+  static String advanceTool = 'advanceTool';
+  static String removeAds = 'removeAds';
+  static String getCredit = 'getCredit';
+  static String perYear = 'perYear';
+  static String billedYearly = 'billedYearly';
+  static String getLifeTimePro = 'getLifeTimePro';
+  static String fullPrice = 'fullPrice';
+  static String yearly = 'yearly';
+  static String buy = 'buy';
+
+  static String FAQ = 'FAQ';
+  static String FAQAccept = 'FAQAccept';
+  static String continueMessage = 'continueMessage';
+
+  static String connectionError= 'connectionError';
+  static String connectionErrorMessage= 'connectionErrorMessage';
+  static String retry= 'retry';
+  static String success= 'success';
+  static String savedToGalley= 'savedToGalley';
+
+  static String price= 'ریال';
+  static String limitMessage= 'limitMessage';
+  static String goLimitless= 'goLimitless';
 
 }

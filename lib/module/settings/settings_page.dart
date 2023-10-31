@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
 import 'package:gpt/core/constants.dart';
+import 'package:gpt/module/first_initial/faq_page.dart';
 import 'package:gpt/module/settings/settings_controller.dart';
+import 'package:gpt/module/shop/plans/shop_page.dart';
 
 class SettingsPage extends GetView<SettingsController> {
   const SettingsPage({Key? key}) : super(key: key);
@@ -64,6 +66,22 @@ class SettingsPage extends GetView<SettingsController> {
                       padding: const EdgeInsets.all(15),
                       child: InkWell(
                         child: Text(
+                          GlobalStrings.upgrade,
+                          style: textStyle,
+                        ).tr(),
+                        onTap: (){
+                          Get.to(const ShopPage());
+                        },
+                      ),
+                    ),
+                    Divider(
+                      color: GlobalColors.divider,
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: InkWell(
+                        child: Text(
                           GlobalStrings.language,
                           style: textStyle,
                         ).tr(),
@@ -100,7 +118,7 @@ class SettingsPage extends GetView<SettingsController> {
                           style: textStyle,
                         ).tr(),
                         onTap: (){
-                          controller.changeLanguage(context);
+                          Get.to(const FAQPage());
                         },
                       ),
                     ),
@@ -135,9 +153,6 @@ class SettingsPage extends GetView<SettingsController> {
                           controller.rateUs();
                         },
                       ),
-                    ),
-                    Divider(
-                      color: GlobalColors.divider,
                     ),
                   ],
                 ),
