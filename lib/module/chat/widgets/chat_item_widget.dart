@@ -6,7 +6,7 @@ import 'package:gpt/core/colors.dart';
 import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/module/chat/chat_page.dart';
 import 'package:gpt/services/locale_services.dart';
-
+import 'dart:ui' as ui;
 class ChatItemWidget extends StatelessWidget {
   final Conversation conversation;
 
@@ -19,11 +19,11 @@ class ChatItemWidget extends StatelessWidget {
       child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
-            color: GlobalColors.thirdBackgroundColor,
-            border: Border.all(color: GlobalColors.borderColor, width: 1),
+            color: GlobalColors.secondBackgroundColor,
+            // border: Border.all(color: GlobalColors.borderColor, width: 1),
           ),
           child: InkWell(
-            child:Padding(
+            child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Row(
                   children: [
@@ -33,12 +33,14 @@ class ChatItemWidget extends StatelessWidget {
                       size: 20,
                     ),
                     // const Spacer(),
-                    Expanded(child: Column(
+                    Expanded(
+                        child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(conversation.summary,
                             softWrap: true,
-                            textDirection: LocaleServices().detectTextDirection(conversation.lastMessage),
+                            textDirection: LocaleServices()
+                                .detectTextDirection(conversation.lastMessage),
                             style: TextStyle(
                                 color: GlobalColors.whiteTextColor,
                                 fontSize: 16,
@@ -49,7 +51,8 @@ class ChatItemWidget extends StatelessWidget {
                         Text(conversation.lastMessage,
                             maxLines: 3,
                             softWrap: true,
-                            textDirection: LocaleServices().detectTextDirection(conversation.lastMessage),
+                            textDirection: LocaleServices()
+                                .detectTextDirection(conversation.lastMessage),
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: GlobalColors.whiteTextColor,
@@ -58,7 +61,8 @@ class ChatItemWidget extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(conversation.createdDate,
+                        Text(getDate(conversation.createdDate),
+                            textDirection: ui.TextDirection.ltr,
                             style: TextStyle(
                                 color: GlobalColors.fadeTextColor,
                                 fontSize: 16,
@@ -66,12 +70,16 @@ class ChatItemWidget extends StatelessWidget {
                       ],
                     ))
                   ],
-                )
-            ),
-            onTap: (){
+                )),
+            onTap: () {
               Get.to(ChatPage(conversation.id, false));
             },
           )),
     );
+  }
+
+  String getDate(String createdDate) {
+    DateTime dateTime = DateTime.parse(createdDate);
+    return "${dateTime.year}-${dateTime.month}-${dateTime.day} ${dateTime.hour}:${dateTime.minute}";
   }
 }

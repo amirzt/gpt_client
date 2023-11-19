@@ -27,83 +27,88 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20), // Rounded corners
       ),
+      // fixedSize: Size(100, 30)
     );
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        ElevatedButton.icon(
-          onPressed: () async {
-            await Clipboard.setData(ClipboardData(text: message.content.value));
-          },
-          icon: Icon(
-            Icons.copy,
-            color: GlobalColors.whiteTextColor,
-            size: 16,
+    return SizedBox(
+      height: 35,
+      child: ListView(
+        // mainAxisAlignment: MainAxisAlignment.end,
+        scrollDirection: Axis.horizontal,
+        children: [
+          ElevatedButton.icon(
+            onPressed: () async {
+              await Clipboard.setData(ClipboardData(text: message.content.value));
+            },
+            icon: Icon(
+              Icons.copy,
+              color: GlobalColors.whiteTextColor,
+              size: 14,
+            ),
+            label: Text(
+              GlobalStrings.copy,
+              style: TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
+            ).tr(),
+            style: style,
           ),
-          label: Text(
-            GlobalStrings.copy,
-            style: TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
-          ).tr(),
-          style: style,
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        ElevatedButton.icon(
-          onPressed: () {
-            controller.visualize();
-          },
-          icon: Icon(
-            Icons.image_outlined,
-            color: GlobalColors.whiteTextColor,
-            size: 16,
+          const SizedBox(
+            width: 10,
           ),
-          label: Text(
-            GlobalStrings.visualize,
-            style: TextStyle(
-                color: GlobalColors.whiteTextColor, fontSize: 12),
-          ).tr(),
-          style: style,
-        ),
-        const SizedBox(
-          width: 10,
-        ),
+          ElevatedButton.icon(
+            onPressed: () {
+              controller.visualize();
+            },
+            icon: Icon(
+              Icons.image_outlined,
+              color: GlobalColors.whiteTextColor,
+              size: 16,
+            ),
+            label: Text(
+              GlobalStrings.visualize,
+              style: TextStyle(
+                  color: GlobalColors.whiteTextColor, fontSize: 12),
+            ).tr(),
+            style: style,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
 
-        ElevatedButton.icon(
-          onPressed: () {
-            if(controller.isSpeaking.value){
-              controller.flutterTts.pause();
-              controller.isSpeaking.value = false;
-            }else{
-              startVoice();
-            }
-          },
-          icon: Icon(
-            Icons.keyboard_voice,
-            color: GlobalColors.whiteTextColor,
-            size: 16,
+          ElevatedButton.icon(
+            onPressed: () {
+              if(controller.isSpeaking.value){
+                controller.flutterTts.pause();
+                controller.isSpeaking.value = false;
+              }else{
+                startVoice();
+              }
+            },
+            icon: Icon(
+              Icons.keyboard_voice,
+              color: GlobalColors.whiteTextColor,
+              size: 16,
+            ),
+            label: Obx(() => Text(
+              controller.isSpeaking.value ? GlobalStrings.pause :GlobalStrings.listen,
+              style: TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
+            ).tr(),),
+            style: style,
           ),
-          label: Obx(() => Text(
-            controller.isSpeaking.value ? GlobalStrings.pause :GlobalStrings.listen,
-            style: TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
-          ).tr(),),
-          style: style,
-        ),
-        // ElevatedButton.icon(
-        //   onPressed: (){
-        //     // Share.share(message.content.value);
-        //   },
-        //   icon: Icon(Icons.share,
-        //     color: GlobalColors.whiteTextColor,
-        //     size: 16,
-        //   ),
-        //   label: Text(GlobalStrings.share,
-        //     style: TextStyle(color: GlobalColors.whiteTextColor,
-        //         fontSize: 12),),
-        //   style: style,
-        // ),
-      ],
+          // ElevatedButton.icon(
+          //   onPressed: (){
+          //     // Share.share(message.content.value);
+          //   },
+          //   icon: Icon(Icons.share,
+          //     color: GlobalColors.whiteTextColor,
+          //     size: 16,
+          //   ),
+          //   label: Text(GlobalStrings.share,
+          //     style: TextStyle(color: GlobalColors.whiteTextColor,
+          //         fontSize: 12),),
+          //   style: style,
+          // ),
+        ],
+      ),
     );
   }
 

@@ -1,16 +1,15 @@
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:gpt/core/colors.dart';
 import 'package:gpt/core/constants.dart';
 import 'package:gpt/global/widgets/progress_indicator.dart';
 import 'package:gpt/module/chat/chat_controller.dart';
 import 'package:gpt/module/chat/widgets/scan_text_widget.dart';
+import 'package:gpt/module/settings/settings_controller.dart';
 import 'package:gpt/module/shop/plans/shop_page.dart';
 import 'package:gpt/services/locale_services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,88 +26,93 @@ class InputWidget extends GetWidget<ChatController> {
 
     return Obx(() => controller.limitReached.value ?
     const LimitReachedWidget()
-    : Row(
-      textDirection: ui.TextDirection.ltr,
-      children: [
-        const SizedBox(
-          width: 20,
+    : Container(
+      color: GlobalColors.secondBackgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Row(
+          textDirection: ui.TextDirection.ltr,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Directionality(
+              textDirection: ui.TextDirection.ltr,
+              child: Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: GlobalColors.mainBackgroundColor),
+                  child: Obx(() => TextFormField(
+                    controller: controller.textEditingController,
+                    style: TextStyle(
+                      color: GlobalColors.whiteTextColor,
+                    ),
+                    textDirection: LocaleServices()
+                        .detectTextDirection(controller.textValue.value),
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(999), // This limits the length of characters
+                    ],
+                    decoration: InputDecoration(
+                        suffixIcon: controller.textValue.value.isEmpty
+                            ? IconButton(
+                          icon: Image.asset(
+                            'assets/icons/scan.png',
+                            color: GlobalColors.whiteTextColor,
+                          ),
+                          onPressed: () {
+                            openGallery();
+                          },
+                        )
+                            : null,
+                        hintText: tr(GlobalStrings.typeMessageHere),
+                        hintStyle: TextStyle(color: GlobalColors.whiteTextColor),
+                        border: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none),
+                  ))),),
+            const SizedBox(
+              width: 10,
+            ),
+            Container(
+                width: 45,
+                height: 45,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: GlobalColors.greenTextColor),
+                child: Obx(() => InkWell(
+                  child: controller.isMessageLoading.value
+                      ? MyProgressIndicator(GlobalColors.whiteTextColor, size: 20,)
+                      : Image.asset(
+                    controller.textValue.value.isEmpty
+                        ? 'assets/icons/voice.png'
+                        : 'assets/icons/send.png',
+                    color: GlobalColors.whiteTextColor,
+                  ),
+                  onTap: () {
+                    if (controller.textValue.value.isNotEmpty) {
+                      controller.addUserMessage();
+                    }
+                  },
+                  onTapDown: (a) {
+                    if(controller.textValue.value.isEmpty){
+                      if(controller.isMessageLoading.value == false){
+                        startRecord();
+                      }
+                    }
+                  },
+                  onTapUp: (a) {
+                    stopRecord();
+                  },
+                )))
+          ],
         ),
-        Directionality(
-          textDirection: ui.TextDirection.rtl,
-          child: Container(
-              width: MediaQuery.of(context).size.width * 0.7,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: GlobalColors.divider),
-              child: Obx(() => TextFormField(
-                controller: controller.textEditingController,
-                style: TextStyle(
-                  color: GlobalColors.whiteTextColor,
-                ),
-                textDirection: LocaleServices()
-                    .detectTextDirection(controller.textValue.value),
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(999), // This limits the length of characters
-                ],
-                decoration: InputDecoration(
-                    prefixIcon: controller.textValue.value.isEmpty
-                        ? IconButton(
-                      icon: Image.asset(
-                        'assets/icons/scan.png',
-                        color: GlobalColors.whiteTextColor,
-                      ),
-                      onPressed: () {
-                        openGallery();
-                      },
-                    )
-                        : null,
-                    hintText: tr(GlobalStrings.typeMessageHere),
-                    hintStyle: TextStyle(color: GlobalColors.whiteTextColor),
-                    border: InputBorder.none,
-                    disabledBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    focusedErrorBorder: InputBorder.none),
-              ))),),
-        const SizedBox(
-          width: 10,
-        ),
-        Container(
-            width: 55,
-            height: 55,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: GlobalColors.greenTextColor),
-            child: Obx(() => InkWell(
-              child: controller.isMessageLoading.value
-                  ? MyProgressIndicator(GlobalColors.whiteTextColor, size: 20,)
-                  : Image.asset(
-                controller.textValue.value.isEmpty
-                    ? 'assets/icons/voice.png'
-                    : 'assets/icons/send.png',
-                color: GlobalColors.whiteTextColor,
-              ),
-              onTap: () {
-                if (controller.textValue.value.isNotEmpty) {
-                  controller.addUserMessage();
-                }
-              },
-              onTapDown: (a) {
-                if(controller.textValue.value.isEmpty){
-                  if(controller.isMessageLoading.value == false){
-                    startRecord();
-                  }
-                }
-              },
-              onTapUp: (a) {
-                stopRecord();
-              },
-            )))
-      ],
-    ));
+      ),
+    )
+    );
   }
 
   void openGallery() async {
@@ -193,6 +197,7 @@ class LimitReachedWidget extends StatelessWidget {
                 )
               ),
                 onPressed: (){
+                Get.put(SettingsController());
                   Get.to(const ShopPage());
                 },
                 child: Text(GlobalStrings.goLimitless,

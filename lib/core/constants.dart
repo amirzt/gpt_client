@@ -68,10 +68,39 @@ class GlobalStrings{
   static String success= 'success';
   static String savedToGalley= 'savedToGalley';
 
-  static String price= 'ریال';
+  static String price= '\$';
   static String limitMessage= 'limitMessage';
   static String goLimitless= 'goLimitless';
   static String update= 'update';
   static String updateDesc= 'updateDesc';
+
+  // new
+  static String coding = 'coding';
+  static String codingDesc = 'codingDesc';
+  static String codingScript = 'codingScript';
+
+  static String game = 'game';
+  static String gameDesc = 'gameDesc';
+  static String gameScript = 'gameScript';
+
+  static String health = 'health';
+  static String healthDesc = 'healthDesc';
+  static String healthScript = 'healthScript';
+
+  static String social = 'social';
+  static String socialDesc = 'socialDesc';
+  static String socialScript = 'socialScript';
+
+  static String video = 'video';
+  static String videoDesc = 'videoDesc';
+  static String videoScript = 'videoScript';
+
+  static String unlimited = 'unlimited';
+  static String questions = 'questions';
+  static String addFree = 'addFree';
+  static String removeAd = 'removeAd';
+  static String moreDetail = 'moreDetail';
+  static String bestAnswer = 'bestAnswer';
+
 
 }

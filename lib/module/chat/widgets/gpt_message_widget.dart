@@ -28,12 +28,12 @@ class GPTMessageWidget extends GetWidget<ChatController> {
       child: Container(
           decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
-                bottomRight: Radius.circular(30),
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
+                bottomRight: Radius.circular(15),
               ),
-              border: Border.all(width: 1, color: GlobalColors.borderColor),
-              color: GlobalColors.divider),
+              // border: Border.all(width: 1, color: GlobalColors.borderColor),
+              color: GlobalColors.secondBackgroundColor),
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(

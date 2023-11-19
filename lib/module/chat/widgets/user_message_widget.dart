@@ -23,14 +23,14 @@ class UserMessageWidget extends GetWidget<GetxController> {
       child: Container(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-              bottomLeft: Radius.circular(30),
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+              bottomLeft: Radius.circular(15),
             ),
             gradient: LinearGradient(
               colors: [
                 GlobalColors.bubbleGradientStart,
-                GlobalColors.bubbleGradientEnd,
+                GlobalColors.bubbleGradientStart,
               ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,

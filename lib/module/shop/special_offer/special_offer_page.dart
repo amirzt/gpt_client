@@ -62,9 +62,9 @@ class SpecialOfferPage extends GetView<SpecialOfferController>{
                   child: Text(
                       "${tr(GlobalStrings.fullPrice)} ${plan.price} ${tr(GlobalStrings.yearly)}",
                       style: TextStyle(
-                          fontWeight: FontWeight.w200,
-                          fontSize: 18,
-                          color: GlobalColors.fadeTextColor
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16,
+                          color: GlobalColors.whiteTextColor
                       )
                   ),
                 ),
@@ -75,7 +75,7 @@ class SpecialOfferPage extends GetView<SpecialOfferController>{
                   padding: const EdgeInsets.all(10),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: GlobalColors.primaryColor,
+                      backgroundColor: const Color.fromARGB(255, 39,136,255),
                       fixedSize: Size(
                           MediaQuery.of(context).size.width * 0.6,
                           65),
@@ -117,11 +117,19 @@ class SpecialOfferPage extends GetView<SpecialOfferController>{
                                 height: 20,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: GlobalColors.borderColor
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        GlobalColors.bubbleGradientStart,
+                                        GlobalColors.bubbleGradientEnd,
+                                      ],
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                    )
                                 ),
                                 child: Icon(Icons.done,
                                   color: GlobalColors.mainBackgroundColor,),
                               ),
+                              const SizedBox(width: 10,),
                               Text(GlobalStrings.fastProcessing,
                                 style: TextStyle(
                                     color: GlobalColors.bodyTextColor,
@@ -148,11 +156,19 @@ class SpecialOfferPage extends GetView<SpecialOfferController>{
                                 height: 20,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: GlobalColors.borderColor
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        GlobalColors.bubbleGradientStart,
+                                        GlobalColors.bubbleGradientEnd,
+                                      ],
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                    )
                                 ),
                                 child: Icon(Icons.done,
                                   color: GlobalColors.mainBackgroundColor,),
                               ),
+                              const SizedBox(width: 10,),
                               Text(GlobalStrings.advanceTool,
                                 style: TextStyle(
                                     color: GlobalColors.bodyTextColor,
@@ -189,11 +205,19 @@ class SpecialOfferPage extends GetView<SpecialOfferController>{
                                 height: 20,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: GlobalColors.borderColor
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        GlobalColors.bubbleGradientStart,
+                                        GlobalColors.bubbleGradientEnd,
+                                      ],
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                    )
                                 ),
                                 child: Icon(Icons.done,
                                   color: GlobalColors.mainBackgroundColor,),
                               ),
+                              const SizedBox(width: 10,),
                               Text(GlobalStrings.removeAds,
                                 style: TextStyle(
                                     color: GlobalColors.bodyTextColor,
@@ -220,11 +244,19 @@ class SpecialOfferPage extends GetView<SpecialOfferController>{
                                 height: 20,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: GlobalColors.borderColor
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        GlobalColors.bubbleGradientStart,
+                                        GlobalColors.bubbleGradientEnd,
+                                      ],
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                    )
                                 ),
                                 child: Icon(Icons.done,
                                   color: GlobalColors.mainBackgroundColor,),
                               ),
+                              const SizedBox(width: 10,),
                               Text(GlobalStrings.getCredit,
                                 style: TextStyle(
                                     color: GlobalColors.bodyTextColor,
@@ -247,7 +279,7 @@ class SpecialOfferPage extends GetView<SpecialOfferController>{
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
-                    color: GlobalColors.fadeTextColor
+                    color: GlobalColors.whiteTextColor
                   ),).tr(),
                 ),
               ),
@@ -269,7 +301,7 @@ class SpecialOfferPage extends GetView<SpecialOfferController>{
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
-                            color: GlobalColors.fadeTextColor
+                            color: GlobalColors.whiteTextColor
                         ),).tr()
                     ],
                   ),

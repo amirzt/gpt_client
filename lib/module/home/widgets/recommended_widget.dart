@@ -17,51 +17,24 @@ class RecommendedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(14),
           color: GlobalColors.secondBackgroundColor,
-          border: Border.all(color: GlobalColors.borderColor, width: 1),
+          // border: Border.all(color: GlobalColors.borderColor, width: 1),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(15),
           child: InkWell(
             child: Row(
               children: [
-                Column(
-                  children: [
-                    Text(task.name,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: GlobalColors.whiteTextColor,
-                          fontSize: 16
-                      ),),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        InkWell(
-                            onTap: () {},
-                            child: Text(
-                              GlobalStrings.useCommand,
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: GlobalColors.blueTextColor,
-                                  fontWeight: FontWeight.bold),
-                            ).tr()
-                        ),
-                        const SizedBox(width: 6,),
-                        Icon(
-                          FontAwesomeIcons.chevronRight,
-                          color: GlobalColors.blueTextColor,
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                Text(task.name,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: GlobalColors.whiteTextColor,
+                      fontSize: 16
+                  ),),
                 const Spacer(),
                 Image.asset(task.icon)
               ],

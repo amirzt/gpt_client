@@ -63,12 +63,18 @@ class SettingsPage extends GetView<SettingsController> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(0),
                       child: InkWell(
-                        child: Text(
-                          GlobalStrings.upgrade,
-                          style: textStyle,
-                        ).tr(),
+                        child: SizedBox(
+                          width: double.maxFinite,
+                          height: 60,
+                          child: Center(
+                            child: Text(
+                              GlobalStrings.upgrade,
+                              style: textStyle,
+                            ).tr(),
+                          ),
+                        ),
                         onTap: (){
                           Get.to(const ShopPage());
                         },
@@ -79,12 +85,18 @@ class SettingsPage extends GetView<SettingsController> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(0),
                       child: InkWell(
-                        child: Text(
-                          GlobalStrings.language,
-                          style: textStyle,
-                        ).tr(),
+                        child: SizedBox(
+                          width: double.maxFinite,
+                          height: 60,
+                          child: Center(
+                            child: Text(
+                              GlobalStrings.language,
+                              style: textStyle,
+                            ).tr(),
+                          ),
+                        ),
                         onTap: (){
                           controller.changeLanguage(context);
                         },
@@ -95,12 +107,18 @@ class SettingsPage extends GetView<SettingsController> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(0),
                       child: InkWell(
-                        child: Text(
-                          GlobalStrings.copyUsername,
-                          style: textStyle,
-                        ).tr(),
+                        child: SizedBox(
+                          width: double.maxFinite,
+                          height: 60,
+                          child: Center(
+                            child: Text(
+                              GlobalStrings.copyUsername,
+                              style: textStyle,
+                            ).tr(),
+                          ),
+                        ),
                         onTap: (){
                           controller.copyUsername();
                         },
@@ -111,12 +129,18 @@ class SettingsPage extends GetView<SettingsController> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(0),
                       child: InkWell(
-                        child: Text(
-                          GlobalStrings.privacyPolicy,
-                          style: textStyle,
-                        ).tr(),
+                        child: SizedBox(
+                          width: double.maxFinite,
+                          height: 60,
+                          child: Center(
+                            child: Text(
+                              GlobalStrings.privacyPolicy,
+                              style: textStyle,
+                            ).tr(),
+                          ),
+                        ),
                         onTap: (){
                           Get.to(const FAQPage());
                         },
@@ -127,12 +151,18 @@ class SettingsPage extends GetView<SettingsController> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(0),
                       child: InkWell(
-                        child: Text(
-                          GlobalStrings.contactInfo,
-                          style: textStyle,
-                        ).tr(),
+                        child: SizedBox(
+                          width: double.maxFinite,
+                          height: 60,
+                          child: Center(
+                            child: Text(
+                              GlobalStrings.contactInfo,
+                              style: textStyle,
+                            ).tr(),
+                          ),
+                        ),
                         onTap: (){
                           controller.copyContactInfo();
                         },
@@ -143,12 +173,18 @@ class SettingsPage extends GetView<SettingsController> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(0),
                       child: InkWell(
-                        child: Text(
-                          GlobalStrings.rate,
-                          style: textStyle,
-                        ).tr(),
+                        child: SizedBox(
+                          width: double.maxFinite,
+                          height: 60,
+                          child: Center(
+                            child: Text(
+                              GlobalStrings.rate,
+                              style: textStyle,
+                            ).tr(),
+                          ),
+                        ),
                         onTap: (){
                           controller.rateUs();
                         },

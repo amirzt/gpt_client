@@ -38,16 +38,19 @@ class ChatPage extends StatelessWidget {
               return true;
             },
             child: SafeArea(
-            child: Scaffold
-              (body: Column(
+            child: Scaffold(
+              resizeToAvoidBottomInset: true,
+                body: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 const ModelChoiceWidget(),
                 Obx(() => Expanded(
+
                     child: controller.isScreenLoading.value ?
-                    MyProgressIndicator(GlobalColors.whiteTextColor)
+                    MyProgressIndicator(GlobalColors.whiteTextColor,
+                    size: 40,)
                         : ListView.builder(
                       // reverse: true,
                         controller: controller.scrollController,
@@ -80,12 +83,11 @@ class ChatPage extends StatelessWidget {
             stringContent: script!,
             stringImage: '')
       );
+      controller.tempContent = script!;
       if(firstSend){
         controller.messages.add(
             Message(role: 'assistant', id: 0, stringContent: '', stringImage: '')
         );
-        controller.conversationId =
-        await ApiProvider().createConversation(controller.gptModel.value, script!);
         controller.sendMessageToGPT();
       }
     }

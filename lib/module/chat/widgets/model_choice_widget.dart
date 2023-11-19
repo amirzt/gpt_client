@@ -1,7 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpt/core/colors.dart';
+import 'package:gpt/core/constants.dart';
 import 'package:gpt/module/chat/chat_controller.dart';
+import 'package:gpt/module/settings/settings_controller.dart';
+import 'package:gpt/module/shop/plans/shop_page.dart';
 
 class ModelChoiceWidget extends GetWidget<ChatController> {
   const ModelChoiceWidget({super.key});
@@ -15,7 +19,7 @@ class ModelChoiceWidget extends GetWidget<ChatController> {
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
-            color: GlobalColors.divider),
+            color: GlobalColors.secondBackgroundColor),
         child: Obx(() => Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -54,8 +58,21 @@ class ModelChoiceWidget extends GetWidget<ChatController> {
                     child: InkWell(
                       onTap: () {
                         if(controller.isExpired.value){
-                          Get.snackbar('upgrade', 'upgrade to use gpt4',
-                          colorText: GlobalColors.whiteTextColor);
+                          Get.snackbar(
+                              'upgrade', 'upgrade to use gpt4',
+                          colorText: GlobalColors.whiteTextColor,
+                          mainButton: TextButton(
+                              onPressed: (){
+                                Get.put(SettingsController());
+                                Get.to(const ShopPage());
+                              },
+                              child: Text(GlobalStrings.upgrade,
+                              style: TextStyle(
+                                color: GlobalColors.bubbleGradientStart,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16
+                              ),).tr()
+                          ));
                         }else{
                           controller.gptModel.value = 'GPT4';
                         }

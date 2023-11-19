@@ -25,7 +25,7 @@ class HomeController extends GetxController {
 
   List<Task> recommended = [
     Task(name: 'how to be rich and make money?  ', id: 1, icon: 'assets/icons/money.png', description: 'description', offline: true, script: 'how can i become rich? give me a short answer', firstSend: true),
-    Task(name: 'Translate “Hello” to Spanish. ', id: 1, icon: 'assets/icons/spain.png', description: 'description', offline: true, script: 'Translate “Hello” to Spanish.', firstSend: true),
+    Task(name: 'Translate “I love you” to Spanish. ', id: 1, icon: 'assets/icons/spain.png', description: 'description', offline: true, script: 'Translate “I love you” to Spanish.', firstSend: true),
     Task(name: 'what is the capital of iran ', id: 1, icon: 'assets/icons/iran.png', description: 'description', offline: true, script: 'what is the capital of iran', firstSend: true),
     Task(name: 'how long can a horse live? ', id: 1, icon: 'assets/icons/horse.png', description: 'description', offline: true, script: 'how long can a horse live?', firstSend: true),
     Task(name: 'what is the biggest building?', id: 1, icon: 'assets/icons/building.png', description: 'description', offline: true, script: 'what is the biggest building?', firstSend: true),

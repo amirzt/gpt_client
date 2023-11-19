@@ -22,14 +22,14 @@ class MyBottomNavigation extends GetWidget<RootController> {
               label: tr(GlobalStrings.chat),
               icon: const ImageIcon(
                 AssetImage('assets/icons/chat.png'),
-                size: 28,
+                size: 24,
               )
           ),
           BottomNavigationBarItem(
               label: tr(GlobalStrings.task),
               icon: const ImageIcon(
                 AssetImage('assets/icons/task.png'),
-                size: 28,
+                size: 24,
               )),
           // BottomNavigationBarItem(
           //     label: GlobalStrings.history,
@@ -44,10 +44,10 @@ class MyBottomNavigation extends GetWidget<RootController> {
               label: tr(GlobalStrings.history),
               icon: const ImageIcon(
                 AssetImage('assets/icons/history.png'),
-                size: 28,
+                size: 24,
               )),
         ],
-        iconSize: 28,
+        iconSize: 24,
         currentIndex: controller.currentIndex.value,
         onTap: (int index) {
           controller.currentIndex.value = index;
@@ -61,18 +61,18 @@ class MyBottomNavigation extends GetWidget<RootController> {
           // controller.animationController.forward();
         },
         backgroundColor: GlobalColors.secondBackgroundColor,
-        selectedItemColor: GlobalColors.primaryColor,
-        unselectedItemColor: GlobalColors.divider,
+        selectedItemColor: GlobalColors.selected,
+        unselectedItemColor: GlobalColors.unSelected,
         showUnselectedLabels: true,
         selectedLabelStyle: TextStyle(
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.normal,
-          color: GlobalColors.primaryColor
+          color: GlobalColors.selected
         ),
         unselectedLabelStyle: TextStyle(
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.normal,
-          color: GlobalColors.divider
+          color: GlobalColors.unSelected
         ),
       );
     });

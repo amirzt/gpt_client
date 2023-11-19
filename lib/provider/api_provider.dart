@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:gpt/data/models/app_version.dart';
+// import 'package:gpt/data/models/app_version.dart';
 import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/data/models/items_model.dart';
 import 'package:gpt/module/chat/chat_controller.dart';
@@ -192,9 +192,11 @@ class ApiProvider {
         messages.map((message) => message.toJson()).toList();
     const url = 'https://api.openai.com/v1/chat/completions';
 
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> keys = prefs.getStringList('api_key') ?? [] ;
     final headers = {
       'Authorization':
-          'Bearer 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',
+          'Bearer ${keys.last}',
       'Content-Type': 'application/json',
     };
     final body = json.encode({
@@ -212,31 +214,78 @@ class ApiProvider {
     request.headers.addAll(headers);
     // request.headers = [];
 
-    StreamSubscription streamSubscription;
-    streamSubscription = client.send(request).asStream().listen((response) {
-      response.stream.listen((event) {
-        // Handle the received event
-        // The event will be of type http.StreamedResponse
-        // You can extract data using event.stream or event.stream.bytesToString()
-        // print('1');
-        // print(utf8.decode(event));
-        Map content = json.decode(utf8.decode(event).split('data: ')[1]);
-        // print(content);
-        if (content['choices'][0]['delta'].containsKey('content')) {
+    http.StreamedResponse streamedResponse = await request.send();
+
+    int partCount = 0;
+    if (streamedResponse.statusCode == 200) {
+      // final streamController = StreamController<String>();
+
+      streamedResponse.stream.transform(utf8.decoder).listen((data) {
+        // Process each part of the stream here
+        // In this example, we print each part to the console
+        // print("stream response : "+data);
+        // Map content = json.decode(data.split('data: ')[1]);
+        // print(data.split('data: ').length);
+        List<String> sData = data.split('data: ');
+        for(var i=1 ; i<sData.length ; i++){
+          Map content = json.decode(sData[i]);
+          // // print(content.toString());
           controller.messages.last.content.value +=
-              content['choices'][0]['delta']['content'];
+          content['choices'][0]['delta']['content'];
           controller.scrollToLast(0);
-          // controller.update();
-        } else {
-          controller.isMessageLoading.value = false;
-          controller.saveMessageToServer(messages.last);
         }
-      }, onError: (error) {
-        // Handle any error that occurs during the connection or data retrieval
-      }, cancelOnError: true);
-    }, onError: (error) {
-      // Handle any error that occurs while establishing the connection
-    });
+        // List part = jsonDecode(data.split('data: '));
+        
+        // Map content = json.decode(data.split('data: ')[1]);
+        // // print(content.toString());
+        // // print(content['choices'][0]['delta']['content']);
+        // controller.messages.last.content.value +=
+        // content['choices'][0]['delta']['content'];
+        // controller.scrollToLast(0);
+
+        // streamController.add(data);
+      }, onDone: () {
+        controller.isMessageLoading.value = false;
+        controller.saveMessageToServer();
+        // print('is done');
+        // streamController.close();
+      });
+
+      // Access the stream to listen for the parts of the response
+      // streamController.stream.listen((part) {
+      //
+      //   // Handle each part of the response here
+      //   // You can process the content of 'part' as needed.
+      //   // print("this is :"+utf8.decode(part).split('data: ').toString());
+      // });
+    } else {
+      // Handle the error here (e.g., response.statusCode is not 200)
+      // print('Error: ${streamedResponse.statusCode}');
+      // print('Response Body: ${streamedResponse.body}');
+    }
+
+    // StreamSubscription streamSubscription;
+    // streamSubscription = client.send(request).asStream().listen((response) {
+    //   response.stream.listen((event) {
+    //     // print("this is :"+utf8.decode(event).split('data: ').toString());
+    //     Map content = json.decode(utf8.decode(event).split('data: ')[1]);
+    //
+    //
+    //     if (content['choices'][0]['delta'].containsKey('content')) {
+    //       controller.messages.last.content.value +=
+    //           content['choices'][0]['delta']['content'];
+    //       controller.scrollToLast(0);
+    //       // controller.update();
+    //     } else {
+    //       controller.isMessageLoading.value = false;
+    //       controller.saveMessageToServer();
+    //     }
+    //   }, onError: (error) {
+    //     // Handle any error that occurs during the connection or data retrieval
+    //   }, cancelOnError: true);
+    // }, onError: (error) {
+    //   // Handle any error that occurs while establishing the connection
+    // });
   }
 
 
@@ -283,7 +332,7 @@ class ApiProvider {
           // controller.update();
         } else {
           controller.isMessageLoading.value = false;
-          controller.saveMessageToServer(messages.last);
+          controller.saveMessageToServer();
         }
       }, onError: (error) {
         // Handle any error that occurs during the connection or data retrieval

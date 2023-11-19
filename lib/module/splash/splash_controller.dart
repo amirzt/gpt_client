@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:gpt/module/first_initial/first_initial_page.dart';
 import 'package:gpt/module/root/root_page.dart';
 import 'package:gpt/provider/api_provider.dart';
-import 'package:gpt/routes/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashController extends GetxController with GetSingleTickerProviderStateMixin{

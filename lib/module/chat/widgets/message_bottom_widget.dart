@@ -25,10 +25,13 @@ class MessageBottomWidget extends GetWidget<ChatController>{
       ),
     );
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        ElevatedButton.icon(
+    return SizedBox(
+      height: 35,
+      child: ListView(
+        // mainAxisAlignment: MainAxisAlignment.end,
+        scrollDirection: Axis.horizontal,
+        children: [
+          ElevatedButton.icon(
             onPressed: () async{
               await Clipboard.setData(ClipboardData(text: message.content.value));
             },
@@ -39,49 +42,50 @@ class MessageBottomWidget extends GetWidget<ChatController>{
             label: Text(GlobalStrings.copy,
               style: TextStyle(color: GlobalColors.whiteTextColor,
                   fontSize: 12),).tr(),
-          style: style,
-        ),
-        const SizedBox( width: 10,),
-        ElevatedButton.icon(
-          onPressed: (){
-            controller.reAsk(message);
-          },
-          icon: Icon(Icons.restart_alt,
-            color: GlobalColors.whiteTextColor,
-            size: 16,
+            style: style,
           ),
-          label: Text(GlobalStrings.reAsk,
-            style: TextStyle(color: GlobalColors.whiteTextColor,
-                fontSize: 12),).tr(),
-          style: style,
-        ),
-        // ElevatedButton.icon(
-        //   onPressed: (){
-        //
-        //   },
-        //   icon: Icon(Icons.restart_alt,
-        //     color: GlobalColors.whiteTextColor,
-        //     size: 14,
-        //   ),
-        //   label: Text(GlobalStrings.pin,
-        //     style: TextStyle(color: GlobalColors.whiteTextColor,
-        //         fontSize: 12),),
-        //   style: style,
-        // ),
-        // ElevatedButton.icon(
-        //   onPressed: (){
-        //     // Share.share(message.content.value);
-        //   },
-        //   icon: Icon(Icons.share,
-        //     color: GlobalColors.whiteTextColor,
-        //     size: 16,
-        //   ),
-        //   label: Text(GlobalStrings.share,
-        //     style: TextStyle(color: GlobalColors.whiteTextColor,
-        //         fontSize: 12),),
-        //   style: style,
-        // ),
-      ],
+          const SizedBox( width: 10,),
+          ElevatedButton.icon(
+            onPressed: (){
+              controller.reAsk(message);
+            },
+            icon: Icon(Icons.restart_alt,
+              color: GlobalColors.whiteTextColor,
+              size: 16,
+            ),
+            label: Text(GlobalStrings.reAsk,
+              style: TextStyle(color: GlobalColors.whiteTextColor,
+                  fontSize: 12),).tr(),
+            style: style,
+          ),
+          // ElevatedButton.icon(
+          //   onPressed: (){
+          //
+          //   },
+          //   icon: Icon(Icons.restart_alt,
+          //     color: GlobalColors.whiteTextColor,
+          //     size: 14,
+          //   ),
+          //   label: Text(GlobalStrings.pin,
+          //     style: TextStyle(color: GlobalColors.whiteTextColor,
+          //         fontSize: 12),),
+          //   style: style,
+          // ),
+          // ElevatedButton.icon(
+          //   onPressed: (){
+          //     // Share.share(message.content.value);
+          //   },
+          //   icon: Icon(Icons.share,
+          //     color: GlobalColors.whiteTextColor,
+          //     size: 16,
+          //   ),
+          //   label: Text(GlobalStrings.share,
+          //     style: TextStyle(color: GlobalColors.whiteTextColor,
+          //         fontSize: 12),),
+          //   style: style,
+          // ),
+        ],
+      ),
     );
   }
 

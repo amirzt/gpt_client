@@ -26,7 +26,7 @@ class CategoriesWidget extends GetWidget<TaskController> {
                         ? LinearGradient(
                       colors: [
                         GlobalColors.bubbleGradientStart,
-                        GlobalColors.bubbleGradientEnd,
+                        GlobalColors.bubbleGradientStart,
                       ],
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,

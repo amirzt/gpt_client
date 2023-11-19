@@ -37,9 +37,10 @@ class ChatController extends GetxController {
   RxList<Message> messages = <Message>[].obs;
   ScrollController scrollController = ScrollController();
 
+  String tempContent = '';
   addUserMessage() async {
     isMessageLoading.value = true;
-    String content = textValue.value;
+    tempContent = textValue.value;
     messages.add(Message(
       role: 'user',
       id: 0,
@@ -50,13 +51,8 @@ class ChatController extends GetxController {
         Message(role: 'assistant', id: 0, stringContent: '', stringImage: ''));
     scrollToLast(1);
 
-    if (conversationId == 0) {
-      conversationId =
-          await ApiProvider().createConversation(gptModel.value, content);
-    } else {
-      saveMessageToServer(messages[messages.length - 2]);
-    }
     sendMessageToGPT();
+
   }
 
   getMessages() async {
@@ -68,8 +64,15 @@ class ChatController extends GetxController {
     }
   }
 
-  saveMessageToServer(Message message) async {
-    ApiProvider().addMessage(conversationId, message);
+  saveMessageToServer() async {
+    if (conversationId == 0) {
+      conversationId =
+      await ApiProvider().createConversation(gptModel.value, tempContent);
+      // ApiProvider().addMessage(conversationId, messages.last);
+    }else{
+      await ApiProvider().addMessage(conversationId, messages[messages.length - 2]);
+    }
+    ApiProvider().addMessage(conversationId, messages.last);
   }
 
   sendMessageToGPT() {
@@ -81,7 +84,6 @@ class ChatController extends GetxController {
     messages.add(pMessage);
     messages.add(
         Message(role: 'assistant', id: 0, stringContent: '', stringImage: ''));
-    saveMessageToServer(messages[messages.length - 2]);
     sendMessageToGPT();
   }
 
