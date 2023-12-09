@@ -102,5 +102,7 @@ class GlobalStrings{
   static String moreDetail = 'moreDetail';
   static String bestAnswer = 'bestAnswer';
 
+  static String listening = 'Listening ...';
+
 
 }

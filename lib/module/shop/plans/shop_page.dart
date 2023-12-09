@@ -8,6 +8,7 @@ import 'package:gpt/core/constants.dart';
 import 'package:gpt/global/widgets/progress_indicator.dart';
 import 'package:gpt/module/settings/settings_controller.dart';
 import 'package:gpt/module/shop/plans/shop_controller.dart';
+import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 
 class ShopPage extends GetView<SettingsController>{
   const ShopPage({super.key});
@@ -56,117 +57,121 @@ class ShopPage extends GetView<SettingsController>{
                   padding: const EdgeInsets.only(bottom: 0),
                   child: SizedBox(
                     height: 75,
-                    child: ListView(
+                    child: ScrollLoopAutoScroll(
                       scrollDirection: Axis.horizontal,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 32, 36, 45),
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(color: GlobalColors.borderColor)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
-                            child: Row(
-                              children: [
-                                Image.asset('assets/icons/star.png',
-                                  width: 30,
-                                  height: 30,),
-                                const SizedBox(width: 10,),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(GlobalStrings.unlimited,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700,
-                                          color: GlobalColors.whiteTextColor
-                                      ),).tr(),
-                                    Text(GlobalStrings.questions,
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400,
-                                          color: GlobalColors.whiteTextColor
-                                      ),).tr(),
-                                  ],
-                                )
-                              ],
+                      delay: const Duration(seconds: 0),
+                      duration: const Duration(seconds: 100),
+                      child: Row(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 32, 36, 45),
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(color: GlobalColors.borderColor)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
+                              child: Row(
+                                children: [
+                                  Image.asset('assets/icons/star.png',
+                                    width: 30,
+                                    height: 30,),
+                                  const SizedBox(width: 10,),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(GlobalStrings.unlimited,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w700,
+                                            color: GlobalColors.whiteTextColor
+                                        ),).tr(),
+                                      Text(GlobalStrings.questions,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400,
+                                            color: GlobalColors.whiteTextColor
+                                        ),).tr(),
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 10,),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 32, 36, 45),
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(color: GlobalColors.borderColor)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
-                            child: Row(
-                              children: [
-                                Image.asset('assets/icons/ad.png',
-                                  width: 30,
-                                  height: 30,),
-                                const SizedBox(width: 10,),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(GlobalStrings.addFree,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700,
-                                          color: GlobalColors.whiteTextColor
-                                      ),).tr(),
-                                    Text(GlobalStrings.removeAds,
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400,
-                                          color: GlobalColors.whiteTextColor
-                                      ),).tr(),
-                                  ],
-                                )
-                              ],
+                          const SizedBox(width: 10,),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 32, 36, 45),
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(color: GlobalColors.borderColor)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
+                              child: Row(
+                                children: [
+                                  Image.asset('assets/icons/ad.png',
+                                    width: 30,
+                                    height: 30,),
+                                  const SizedBox(width: 10,),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(GlobalStrings.addFree,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w700,
+                                            color: GlobalColors.whiteTextColor
+                                        ),).tr(),
+                                      Text(GlobalStrings.removeAds,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400,
+                                            color: GlobalColors.whiteTextColor
+                                        ),).tr(),
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 10,),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 32, 36, 45),
-                              borderRadius: BorderRadius.circular(30),
-                              border: Border.all(color: GlobalColors.borderColor)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
-                            child: Row(
-                              children: [
-                                Image.asset('assets/icons/stars.png',
-                                  width: 30,
-                                  height: 30,),
-                                const SizedBox(width: 10,),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(GlobalStrings.moreDetail,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w700,
-                                          color: GlobalColors.whiteTextColor
-                                      ),).tr(),
-                                    Text(GlobalStrings.bestAnswer,
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400,
-                                          color: GlobalColors.whiteTextColor
-                                      ),).tr(),
-                                  ],
-                                )
-                              ],
+                          const SizedBox(width: 10,),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 32, 36, 45),
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(color: GlobalColors.borderColor)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
+                              child: Row(
+                                children: [
+                                  Image.asset('assets/icons/stars.png',
+                                    width: 30,
+                                    height: 30,),
+                                  const SizedBox(width: 10,),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(GlobalStrings.moreDetail,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w700,
+                                            color: GlobalColors.whiteTextColor
+                                        ),).tr(),
+                                      Text(GlobalStrings.bestAnswer,
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400,
+                                            color: GlobalColors.whiteTextColor
+                                        ),).tr(),
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -232,7 +237,7 @@ class ShopPage extends GetView<SettingsController>{
                                       Obx(() =>
                                           Theme(
                                               data: Theme.of(context).copyWith(
-                                                  checkboxTheme: CheckboxThemeData(
+                                                  checkboxTheme: const CheckboxThemeData(
                                                       shape: CircleBorder(
                                                           side: BorderSide(
                                                               color: Colors.white
@@ -240,16 +245,18 @@ class ShopPage extends GetView<SettingsController>{
                                                       )
                                                   )
                                               ),
-                                              child: Checkbox(
-                                                  checkColor: const Color.fromARGB(255, 39,136,255),
-                                                  shape: const CircleBorder(),
-                                                  activeColor:
-                                                  GlobalColors.primaryColor,
-                                                  value:
-                                                  controller.selectedIndex.value == index,
-                                                  onChanged: (value) {
+                                              child: AbsorbPointer(
+                                                child: Checkbox(
+                                                    checkColor: const Color.fromARGB(255, 39,136,255),
+                                                    shape: const CircleBorder(),
+                                                    activeColor:
+                                                    GlobalColors.primaryColor,
+                                                    value:
+                                                    controller.selectedIndex.value == index,
+                                                    onChanged: (value) {
 
-                                                  })
+                                                    }),
+                                              )
                                           )),
                                       const SizedBox(width: 30,),
 

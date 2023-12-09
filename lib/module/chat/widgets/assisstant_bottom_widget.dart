@@ -8,16 +8,18 @@ import 'package:gpt/core/constants.dart';
 import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/global/widgets/progress_indicator.dart';
 import 'package:gpt/module/chat/chat_controller.dart';
+import 'package:gpt/services/locale_services.dart';
+import 'package:vibration/vibration.dart';
 // import 'package:share_plus/share_plus.dart';
 
 class AssistantBottomWidget extends GetWidget<ChatController> {
   final Message message;
+  final int index;
 
-  const AssistantBottomWidget(this.message, {super.key});
+  const AssistantBottomWidget(this.message, this.index, {super.key});
 
   @override
   Widget build(BuildContext context) {
-
     ButtonStyle style = ElevatedButton.styleFrom(
       backgroundColor: Colors.grey.shade200.withOpacity(0.3),
       // Semi-transparent background
@@ -38,7 +40,10 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
         children: [
           ElevatedButton.icon(
             onPressed: () async {
-              await Clipboard.setData(ClipboardData(text: message.content.value));
+              await Clipboard.setData(
+                  ClipboardData(text: message.content.value));
+              Vibration.vibrate(duration: 100);
+              // Get.snackbar(tr(GlobalStrings.copy), tr(GlobalStrings.success));
             },
             icon: Icon(
               Icons.copy,
@@ -47,7 +52,8 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
             ),
             label: Text(
               GlobalStrings.copy,
-              style: TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
+              style:
+                  TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
             ).tr(),
             style: style,
           ),
@@ -56,7 +62,7 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
           ),
           ElevatedButton.icon(
             onPressed: () {
-              controller.visualize();
+              controller.visualize(index);
             },
             icon: Icon(
               Icons.image_outlined,
@@ -65,8 +71,8 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
             ),
             label: Text(
               GlobalStrings.visualize,
-              style: TextStyle(
-                  color: GlobalColors.whiteTextColor, fontSize: 12),
+              style:
+                  TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
             ).tr(),
             style: style,
           ),
@@ -74,26 +80,36 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
             width: 10,
           ),
 
-          ElevatedButton.icon(
-            onPressed: () {
-              if(controller.isSpeaking.value){
-                controller.flutterTts.pause();
-                controller.isSpeaking.value = false;
-              }else{
-                startVoice();
-              }
-            },
-            icon: Icon(
-              Icons.keyboard_voice,
-              color: GlobalColors.whiteTextColor,
-              size: 16,
-            ),
-            label: Obx(() => Text(
-              controller.isSpeaking.value ? GlobalStrings.pause :GlobalStrings.listen,
-              style: TextStyle(color: GlobalColors.whiteTextColor, fontSize: 12),
-            ).tr(),),
-            style: style,
-          ),
+          LocaleServices().isEnglish(message.content.value)
+              ? ElevatedButton.icon(
+                  onPressed: () {
+                    controller.speakingIndex.value = index;
+                    if (controller.isSpeaking.value) {
+                      controller.flutterTts.pause();
+                      controller.isSpeaking.value = false;
+                    } else {
+                      startVoice();
+                    }
+                  },
+                  icon: Icon(
+                    Icons.keyboard_voice,
+                    color: GlobalColors.whiteTextColor,
+                    size: 16,
+                  ),
+                  label: Obx(
+                    () => Text(
+                      controller.speakingIndex.value == index ?
+                      controller.isSpeaking.value
+                          ? GlobalStrings.pause
+                          : GlobalStrings.listen
+                      : GlobalStrings.listen,
+                      style: TextStyle(
+                          color: GlobalColors.whiteTextColor, fontSize: 12),
+                    ).tr(),
+                  ),
+                  style: style,
+                )
+              : Container()
           // ElevatedButton.icon(
           //   onPressed: (){
           //     // Share.share(message.content.value);

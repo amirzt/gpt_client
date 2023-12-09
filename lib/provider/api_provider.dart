@@ -289,6 +289,37 @@ class ApiProvider {
   }
 
 
+  Future<void> sendNonStreamMessage(List<Message> messages, String model) async{
+    List<Map<String, dynamic>> jsonMessages =
+    messages.map((message) => message.toJson()).toList();
+    const url = 'https://api.openai.com/v1/chat/completions';
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> keys = prefs.getStringList('api_key') ?? [] ;
+    final headers = {
+      'Authorization':
+      'Bearer ${keys.last}',
+      'Content-Type': 'application/json',
+    };
+    final body = json.encode({
+      'messages': jsonMessages,
+      "model": model,
+      'stream': true,
+    });
+    String token = await TokenService().getToken();
+
+    ChatController controller = Get.put(ChatController());
+    Map response = await GlobalService()
+        .postRequestMapReturn(token, Uri.parse(url), {
+      'messages': jsonMessages,
+      "model": model,
+      'stream': true,
+    });
+    controller.messages.last.content = response['content'];
+    controller.isMessageLoading.value = false;
+    controller.saveMessageToServer();
+  }
+
   Future<void> sendTryMessageFromServer(List<Message> messages, String model) async {
     // List<Message> reversedMessage = messages.reversed.toList();
     List<Map<String, dynamic>> jsonMessages =
@@ -343,7 +374,7 @@ class ApiProvider {
   }
 
 
-  Future<void> visualize(String prompt) async {
+  Future<void> visualize(String prompt, int index) async {
     final headers = {
       'Authorization':
           'Bearer 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',
@@ -359,9 +390,10 @@ class ApiProvider {
 
     ChatController controller = Get.put(ChatController());
     Map map = json.decode(utf8.decode(response.bodyBytes));
-    controller.messages.last.image.value = map['data'][0]['url'];
+    controller.messages[index].image.value = map['data'][0]['url'];
     controller.isVisualizeLoading.value = false;
-    updateMessage(controller.conversationId, map['data'][0]['url']);
+
+    // updateMessage(controller.conversationId, map['data'][0]['url']);
     // controller.scrollToLast(2);
   }
 

@@ -8,6 +8,7 @@ import 'package:gpt/core/colors.dart';
 import 'package:gpt/core/constants.dart';
 import 'package:gpt/global/widgets/progress_indicator.dart';
 import 'package:gpt/module/chat/chat_controller.dart';
+import 'package:gpt/module/chat/widgets/camera_gallery_bottom_sheet.dart';
 import 'package:gpt/module/chat/widgets/scan_text_widget.dart';
 import 'package:gpt/module/settings/settings_controller.dart';
 import 'package:gpt/module/shop/plans/shop_page.dart';
@@ -16,6 +17,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'dart:ui' as ui;
+
+import 'package:vibration/vibration.dart';
 
 class InputWidget extends GetWidget<ChatController> {
   const InputWidget({super.key});
@@ -61,11 +64,25 @@ class InputWidget extends GetWidget<ChatController> {
                             color: GlobalColors.whiteTextColor,
                           ),
                           onPressed: () {
-                            openGallery();
+                            showModalBottomSheet(
+                                barrierColor: Colors.transparent.withAlpha(0),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(25),
+                                      topRight: Radius.circular(25)
+                                  ),
+                                ),
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) {
+                                  return const CameraGalleyBottomSheet();
+                                });
                           },
                         )
                             : null,
-                        hintText: tr(GlobalStrings.typeMessageHere),
+                        hintText: !controller.isSpeaking.value
+                         ? tr(GlobalStrings.typeMessageHere)
+                        : GlobalStrings.listening,
                         hintStyle: TextStyle(color: GlobalColors.whiteTextColor),
                         border: InputBorder.none,
                         disabledBorder: InputBorder.none,
@@ -93,8 +110,11 @@ class InputWidget extends GetWidget<ChatController> {
                     color: GlobalColors.whiteTextColor,
                   ),
                   onTap: () {
-                    if (controller.textValue.value.isNotEmpty) {
-                      controller.addUserMessage();
+                    if(!controller.isMessageLoading.value){
+                      if (controller.textValue.value.isNotEmpty) {
+                        Vibration.vibrate(duration: 100);
+                        controller.addUserMessage();
+                      }
                     }
                   },
                   onTapDown: (a) {
@@ -134,7 +154,10 @@ class InputWidget extends GetWidget<ChatController> {
   }
 
   void startRecord() async {
-    print('started');
+    controller.hintText.value = tr(GlobalStrings.listening);
+    controller.isSpeaking.value = true;
+    Vibration.vibrate(duration: 100);
+
     SpeechToText speech = SpeechToText();
     bool success = await speech.initialize();
     if (success) {
@@ -146,11 +169,15 @@ class InputWidget extends GetWidget<ChatController> {
   }
 
   void stopRecord() {
-    print('stopped');
+    controller.isSpeaking.value = false;
+    controller.hintText.value = tr(GlobalStrings.typeMessageHere);
+    // print('stopped');
   }
 
   void onSpeechResult(SpeechRecognitionResult result) {
-    print(result.recognizedWords);
+    controller.hintText.value = tr(GlobalStrings.typeMessageHere);
+    controller.isSpeaking.value = true;
+    // print(result.recognizedWords);
     controller.textEditingController.text = result.recognizedWords;
   }
 

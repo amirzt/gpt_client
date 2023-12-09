@@ -30,4 +30,14 @@ class LocaleServices{
     final hasRtlCharacters = RegExp(r'[\u0600-\u06FF\u0750-\u077F]');
     return hasRtlCharacters.hasMatch(text) ? TextDirection.rtl : TextDirection.ltr;
   }
+
+  bool isPersian(String text) {
+    final hasRtlCharacters = RegExp(r'[\u0600-\u06FF\u0750-\u077F]');
+    return hasRtlCharacters.hasMatch(text) ? true : false;
+  }
+
+  bool isEnglish(String text) {
+    final hasEnglishCharacters = RegExp(r'[a-zA-Z]');
+    return hasEnglishCharacters.hasMatch(text) ? true : false;
+  }
 }

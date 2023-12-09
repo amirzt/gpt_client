@@ -7,6 +7,7 @@ import 'package:gpt/core/colors.dart';
 import 'package:gpt/core/constants.dart';
 import 'package:gpt/data/models/conversation_model.dart';
 import 'package:gpt/module/chat/chat_controller.dart';
+import 'package:vibration/vibration.dart';
 // import 'package:share_plus/share_plus.dart';
 
 class MessageBottomWidget extends GetWidget<ChatController>{
@@ -34,6 +35,7 @@ class MessageBottomWidget extends GetWidget<ChatController>{
           ElevatedButton.icon(
             onPressed: () async{
               await Clipboard.setData(ClipboardData(text: message.content.value));
+              Vibration.vibrate(duration: 100);
             },
             icon: Icon(Icons.copy,
               color: GlobalColors.whiteTextColor,

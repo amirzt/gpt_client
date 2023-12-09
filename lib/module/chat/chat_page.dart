@@ -23,6 +23,7 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get.put(ChatController());
     // ScrollController scrollController = ScrollController(initialScrollOffset: double.infinity);
     // Get.lazyPut(() => ChatController());
     controller.messages.clear();
@@ -35,6 +36,8 @@ class ChatPage extends StatelessWidget {
         return WillPopScope(
             onWillPop: () async{
               controller.flutterTts.stop();
+              controller.onInit();
+              // Get.put(ChatController());
               return true;
             },
             child: SafeArea(
@@ -60,7 +63,7 @@ class ChatPage extends StatelessWidget {
                           if(controller.messages[index].role == 'user'){
                             return UserMessageWidget(controller.messages[index]);
                           }else{
-                            return GPTMessageWidget(controller.messages[index]);
+                            return GPTMessageWidget(controller.messages[index], index);
                           }
                         })
                 )),

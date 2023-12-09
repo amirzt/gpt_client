@@ -221,7 +221,7 @@ class FirstInitialPage extends StatelessWidget{
                         backgroundColor: GlobalColors.primaryColor
                     ),
                     onPressed: (){
-                      Get.to(const RootPage(true));
+                      Get.offAll(const RootPage(true));
                     },
                     child: Text(GlobalStrings.continueMessage,
                       style: TextStyle(color: GlobalColors.whiteTextColor, fontSize: 18, fontWeight: FontWeight.bold),).tr()

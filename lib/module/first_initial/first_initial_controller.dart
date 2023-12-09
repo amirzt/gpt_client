@@ -5,11 +5,15 @@ import 'package:get/get.dart';
 
 class FirstInitialController extends GetxController{
   var selectedLanguage = 0.obs;
+  var firstSlideImage = false.obs;
+  var secondSlideImage = false.obs;
+  var thirdSlideImage = false.obs;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    startAnimations();
     getAppsLocale();
   }
 
@@ -100,6 +104,24 @@ class FirstInitialController extends GetxController{
 
     }
 
+  }
+
+  void startAnimations() async{
+    await Future.delayed(const Duration(seconds: 1));
+    firstSlideImage.value = true;
+    update();
+  }
+
+  void startSecondAnimations() async{
+    await Future.delayed(const Duration(seconds: 0));
+    secondSlideImage.value = true;
+    update();
+  }
+
+  void startThirdAnimations() async{
+    await Future.delayed(const Duration(seconds: 0));
+    thirdSlideImage.value = true;
+    update();
   }
 
 }

@@ -39,18 +39,24 @@ class UserMessageWidget extends GetWidget<GetxController> {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment:
+                  LocaleServices().isPersian(message.content.value)
+                      ? CrossAxisAlignment.end
+                      : CrossAxisAlignment.start,
               children: [
-                Obx(() => Text(
-                  message.content.value,
-                  // textDirection: LocaleServices()
-                  //     .detectTextDirection(message.content.value),
-                  style: TextStyle(
-                    color: GlobalColors.whiteTextColor,
+                Obx(
+                  () => Text(
+                    message.content.value,
+                    textDirection: LocaleServices()
+                        .detectTextDirection(message.content.value),
+                    style: TextStyle(
+                      color: GlobalColors.whiteTextColor,
+                    ),
                   ),
-                ),),
-
-                const SizedBox(height: 10,),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 MessageBottomWidget(message)
               ],
             ),

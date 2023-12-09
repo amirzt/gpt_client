@@ -2,6 +2,7 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 import 'package:gpt/module/first_initial/first_initial_page.dart';
+import 'package:gpt/module/first_initial/widgets/slide1_page.dart';
 import 'package:gpt/module/root/root_page.dart';
 import 'package:gpt/provider/api_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,7 +22,7 @@ class SplashController extends GetxController with GetSingleTickerProviderStateM
     );
     // animationController.forward();
     // repeatAnim();
-    getUserInfo();
+    startAnimations();
   }
 
   void getUserInfo() async{
@@ -47,7 +48,7 @@ class SplashController extends GetxController with GetSingleTickerProviderStateM
         }
       }else{
         await ApiProvider().login();
-        Get.off(FirstInitialPage());
+        Get.off(const Slide1Page());
       }
     }catch(e){
       Get.off(const RootPage(false));
@@ -86,6 +87,15 @@ class SplashController extends GetxController with GetSingleTickerProviderStateM
     isBottomVisible.value = true;
     animationController.forward();
     getUserInfo();
+  }
+
+  void startAnimations() async{
+    // await Future.delayed(const Duration(milliseconds: 400));
+    isBottomVisible.value = true;
+    animationController.forward();
+    update();
+    getUserInfo();
+
   }
 
 }
