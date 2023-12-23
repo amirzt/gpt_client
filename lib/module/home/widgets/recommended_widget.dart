@@ -28,14 +28,16 @@ class RecommendedItem extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           child: InkWell(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(task.name,
+                Flexible(child: Text(task.name,
                   style: TextStyle(
                       fontWeight: FontWeight.w400,
                       color: GlobalColors.whiteTextColor,
                       fontSize: 16
-                  ),),
-                const Spacer(),
+                  ),),),
+                const SizedBox(width: 10,),
+                // const Spacer(),
                 Image.asset(task.icon)
               ],
             ),

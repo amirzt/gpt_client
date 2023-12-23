@@ -36,7 +36,9 @@ class SplashPage extends GetView<SplashController> {
                 child: FadeTransition(
                   opacity: animation,
                   child: Image.asset(
-                      'assets/icons/icon.png'), // Replace with your item widget
+                      'assets/icons/ic_launcher.png',
+                  width: 120,
+                  height: 120,), // Replace with your item widget
                 ),
               ),
               Align(

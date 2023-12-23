@@ -43,9 +43,11 @@ class TaskItemWidget extends StatelessWidget {
                     ),
                     Text(
                       task.description,
-                      softWrap: true,
+                      // softWrap: true,
                       textAlign: TextAlign.start,
                       textDirection: TextDirection.ltr,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
                       style: TextStyle(
                           color: GlobalColors.whiteTextColor,
                           fontSize: 16,

@@ -5,7 +5,7 @@ class ConstantValue{
 }
 
 class GlobalStrings{
-  static String appName = 'appName';
+  static String appName = 'ChatGPT';
   static String chat = 'chat';
   static String task = 'task';
   static String tasks = 'tasks';

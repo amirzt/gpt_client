@@ -11,6 +11,7 @@ class ChatController extends GetxController {
   var message = ''.obs;
   var gptModel = 'GPT-turbo'.obs;
   var isSpeaking = false.obs;
+  var isBTS = false.obs;
   var isCropping = false.obs;
   TextEditingController textEditingController = TextEditingController();
   RxString textValue = ''.obs;

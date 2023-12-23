@@ -84,9 +84,9 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
               ? ElevatedButton.icon(
                   onPressed: () {
                     controller.speakingIndex.value = index;
-                    if (controller.isSpeaking.value) {
+                    if (controller.isBTS.value) {
                       controller.flutterTts.pause();
-                      controller.isSpeaking.value = false;
+                      controller.isBTS.value = false;
                     } else {
                       startVoice();
                     }
@@ -99,7 +99,7 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
                   label: Obx(
                     () => Text(
                       controller.speakingIndex.value == index ?
-                      controller.isSpeaking.value
+                      controller.isBTS.value
                           ? GlobalStrings.pause
                           : GlobalStrings.listen
                       : GlobalStrings.listen,
@@ -129,7 +129,7 @@ class AssistantBottomWidget extends GetWidget<ChatController> {
   }
 
   void startVoice() async {
-    controller.isSpeaking.value = true;
+    controller.isBTS.value = true;
     controller.flutterTts.speak(message.content.value);
   }
 }

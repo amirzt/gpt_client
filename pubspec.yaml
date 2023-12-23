@@ -35,7 +35,7 @@ dependencies:
   share_plus: ^7.1.0
   vibration: ^1.8.4
   scroll_loop_auto_scroll: ^0.0.5
-
+  flutter_highlight: ^0.7.0
   #  share_plus: ^7.1.0
 
   cupertino_icons: ^1.0.2
@@ -43,8 +43,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
 
   flutter_lints: ^2.0.0
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/ic_launcher.png"
 
 flutter:
 

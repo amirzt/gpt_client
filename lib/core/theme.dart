@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'colors.dart';
 
@@ -43,12 +44,12 @@ class ThemeConfig {
       titleSmall: TextStyle(fontSize: 12),
       titleLarge: TextStyle(fontSize: 14),
     ).apply(
-      fontFamily: 'Inter',
+      fontFamily: getFontFamily(),
     );
 
     return ThemeData(
       useMaterial3: true,
-      fontFamily: 'Inter',
+      fontFamily: getFontFamily(),
       textTheme: myTextTheme,
       canvasColor: background,
       cardColor: cardBackground,
@@ -81,14 +82,14 @@ class ThemeConfig {
         toolbarTextStyle: TextTheme(
           bodyLarge: baseTextTheme.bodyLarge!.copyWith(
             color: secondaryText,
-            fontFamily: 'Inter',
+            fontFamily: getFontFamily(),
             fontSize: 18,
           ),
         ).bodyMedium,
         titleTextStyle: TextTheme(
           bodyLarge: baseTextTheme.bodyLarge!.copyWith(
             color: secondaryText,
-            fontFamily: 'Inter',
+            fontFamily: getFontFamily(),
             fontSize: 18,
           ),
         ).titleLarge,
@@ -107,19 +108,19 @@ class ThemeConfig {
         labelStyle: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 14,
-          fontFamily: 'Inter',
+          fontFamily: getFontFamily(),
           color: primaryText,
         ),
         hintStyle: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 14,
-          fontFamily: 'Inter',
+          fontFamily: getFontFamily(),
           color: primaryText.withOpacity(0.8),
         ),
         errorStyle: TextStyle(
           fontWeight: FontWeight.normal,
           fontSize: 12,
-          fontFamily: 'Inter',
+          fontFamily: getFontFamily(),
           color: error,
         ),
         enabledBorder: UnderlineInputBorder(
@@ -232,4 +233,12 @@ class ThemeConfig {
     error: GlobalColors.errorColor,
 
   );
+
+  static getFontFamily() {
+    if(Get.locale?.languageCode == 'fa' || Get.locale?.languageCode == 'ar'){
+      return 'IRANSansX';
+    }else{
+      return 'Inter';
+    }
+  }
 }

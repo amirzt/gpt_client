@@ -9,6 +9,7 @@ import 'package:gpt/global/widgets/progress_indicator.dart';
 import 'package:gpt/module/settings/settings_controller.dart';
 import 'package:gpt/module/shop/plans/shop_controller.dart';
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
+import 'dart:ui' as ui;
 
 class ShopPage extends GetView<SettingsController>{
   const ShopPage({super.key});
@@ -57,121 +58,125 @@ class ShopPage extends GetView<SettingsController>{
                   padding: const EdgeInsets.only(bottom: 0),
                   child: SizedBox(
                     height: 75,
-                    child: ScrollLoopAutoScroll(
-                      scrollDirection: Axis.horizontal,
-                      delay: const Duration(seconds: 0),
-                      duration: const Duration(seconds: 100),
-                      child: Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 32, 36, 45),
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(color: GlobalColors.borderColor)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
-                              child: Row(
-                                children: [
-                                  Image.asset('assets/icons/star.png',
-                                    width: 30,
-                                    height: 30,),
-                                  const SizedBox(width: 10,),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                    child: Directionality(
+                        textDirection: ui.TextDirection.ltr,
+                        child: ScrollLoopAutoScroll(
+                          scrollDirection: Axis.horizontal,
+                          delay: const Duration(seconds: 0),
+                          duration: const Duration(seconds: 100),
+                          child: Row(
+                            textDirection: ui.TextDirection.rtl,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(255, 32, 36, 45),
+                                    borderRadius: BorderRadius.circular(30),
+                                    border: Border.all(color: GlobalColors.borderColor)
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
+                                  child: Row(
                                     children: [
-                                      Text(GlobalStrings.unlimited,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700,
-                                            color: GlobalColors.whiteTextColor
-                                        ),).tr(),
-                                      Text(GlobalStrings.questions,
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
-                                            color: GlobalColors.whiteTextColor
-                                        ),).tr(),
+                                      Image.asset('assets/icons/star.png',
+                                        width: 30,
+                                        height: 30,),
+                                      const SizedBox(width: 10,),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(GlobalStrings.unlimited,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w700,
+                                                color: GlobalColors.whiteTextColor
+                                            ),).tr(),
+                                          Text(GlobalStrings.questions,
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                                color: GlobalColors.whiteTextColor
+                                            ),).tr(),
+                                        ],
+                                      )
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          const SizedBox(width: 10,),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 32, 36, 45),
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(color: GlobalColors.borderColor)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
-                              child: Row(
-                                children: [
-                                  Image.asset('assets/icons/ad.png',
-                                    width: 30,
-                                    height: 30,),
-                                  const SizedBox(width: 10,),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                              const SizedBox(width: 10,),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(255, 32, 36, 45),
+                                    borderRadius: BorderRadius.circular(30),
+                                    border: Border.all(color: GlobalColors.borderColor)
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
+                                  child: Row(
                                     children: [
-                                      Text(GlobalStrings.addFree,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700,
-                                            color: GlobalColors.whiteTextColor
-                                        ),).tr(),
-                                      Text(GlobalStrings.removeAds,
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
-                                            color: GlobalColors.whiteTextColor
-                                        ),).tr(),
+                                      Image.asset('assets/icons/ad.png',
+                                        width: 30,
+                                        height: 30,),
+                                      const SizedBox(width: 10,),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(GlobalStrings.addFree,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w700,
+                                                color: GlobalColors.whiteTextColor
+                                            ),).tr(),
+                                          Text(GlobalStrings.removeAds,
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                                color: GlobalColors.whiteTextColor
+                                            ),).tr(),
+                                        ],
+                                      )
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          const SizedBox(width: 10,),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 32, 36, 45),
-                                borderRadius: BorderRadius.circular(30),
-                                border: Border.all(color: GlobalColors.borderColor)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
-                              child: Row(
-                                children: [
-                                  Image.asset('assets/icons/stars.png',
-                                    width: 30,
-                                    height: 30,),
-                                  const SizedBox(width: 10,),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                              const SizedBox(width: 10,),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: const Color.fromARGB(255, 32, 36, 45),
+                                    borderRadius: BorderRadius.circular(30),
+                                    border: Border.all(color: GlobalColors.borderColor)
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 20, right: 20, top:5, bottom: 5),
+                                  child: Row(
                                     children: [
-                                      Text(GlobalStrings.moreDetail,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700,
-                                            color: GlobalColors.whiteTextColor
-                                        ),).tr(),
-                                      Text(GlobalStrings.bestAnswer,
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
-                                            color: GlobalColors.whiteTextColor
-                                        ),).tr(),
+                                      Image.asset('assets/icons/stars.png',
+                                        width: 30,
+                                        height: 30,),
+                                      const SizedBox(width: 10,),
+                                      Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(GlobalStrings.moreDetail,
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w700,
+                                                color: GlobalColors.whiteTextColor
+                                            ),).tr(),
+                                          Text(GlobalStrings.bestAnswer,
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                                color: GlobalColors.whiteTextColor
+                                            ),).tr(),
+                                        ],
+                                      )
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        )
                     ),
                   ),
                 ),

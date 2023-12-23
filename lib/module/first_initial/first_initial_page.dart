@@ -54,6 +54,9 @@ class FirstInitialPage extends StatelessWidget{
                             padding: const EdgeInsets.only(top: 14, bottom: 14, left: 30, right: 30),
                             child: Row(
                               children: [
+                                Image.asset('assets/icons/uk.png',
+                                  width: 24, height: 24,),
+                                const SizedBox(width: 10,),
                                 Text('English', style: textStyle,),
                                 const Spacer(),
                                 controller.selectedLanguage.value == 0 ?
@@ -76,6 +79,9 @@ class FirstInitialPage extends StatelessWidget{
                             padding: const EdgeInsets.only(top: 14, bottom: 14, left: 30, right: 30),
                             child: Row(
                               children: [
+                                Image.asset('assets/icons/ir.png',
+                                  width: 24, height: 24,),
+                                const SizedBox(width: 10,),
                                 Text('فارسی', style: textStyle,),
                                 const Spacer(),
                                 controller.selectedLanguage.value == 1 ?
@@ -98,6 +104,9 @@ class FirstInitialPage extends StatelessWidget{
                             padding: const EdgeInsets.only(top: 14, bottom: 14, left: 30, right: 30),
                             child: Row(
                               children: [
+                                Image.asset('assets/icons/ru.png',
+                                  width: 24, height: 24,),
+                                const SizedBox(width: 10,),
                                 Text('Pусский', style: textStyle,),
                                 const Spacer(),
                                 controller.selectedLanguage.value == 2 ?
@@ -120,6 +129,9 @@ class FirstInitialPage extends StatelessWidget{
                             padding: const EdgeInsets.only(top: 14, bottom: 14, left: 30, right: 30),
                             child: Row(
                               children: [
+                                Image.asset('assets/icons/ph.png',
+                                  width: 24, height: 24,),
+                                const SizedBox(width: 10,),
                                 Text('Filipino', style: textStyle,),
                                 const Spacer(),
                                 controller.selectedLanguage.value == 3 ?
@@ -142,6 +154,9 @@ class FirstInitialPage extends StatelessWidget{
                             padding: const EdgeInsets.only(top: 14, bottom: 14, left: 30, right: 30),
                             child: Row(
                               children: [
+                                Image.asset('assets/icons/jp.png',
+                                  width: 24, height: 24,),
+                                const SizedBox(width: 10,),
                                 Text('日本語', style: textStyle,),
                                 const Spacer(),
                                 controller.selectedLanguage.value == 4 ?
@@ -164,6 +179,9 @@ class FirstInitialPage extends StatelessWidget{
                             padding: const EdgeInsets.only(top: 14, bottom: 14, left: 30, right: 30),
                             child: Row(
                               children: [
+                                Image.asset('assets/icons/du.png',
+                                  width: 24, height: 24,),
+                                const SizedBox(width: 10,),
                                 Text('Deutsch', style: textStyle,),
                                 const Spacer(),
                                 controller.selectedLanguage.value == 5 ?
@@ -186,6 +204,9 @@ class FirstInitialPage extends StatelessWidget{
                             padding: const EdgeInsets.only(top: 14, bottom: 14, left: 30, right: 30),
                             child: Row(
                               children: [
+                                Image.asset('assets/icons/ar.png',
+                                  width: 24, height: 24,),
+                                const SizedBox(width: 10,),
                                 Text('عربي', style: textStyle,),
                                 const Spacer(),
                                 controller.selectedLanguage.value == 6 ?
