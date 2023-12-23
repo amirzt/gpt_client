@@ -14,7 +14,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController {
-  Plan plan = Plan(title: '', price: '0', id: 0, checked: false);
+  Plan plan = Plan(title: '', price: '0', id: 0, checked: false, myket: '');
 
   @override
   onInit(){

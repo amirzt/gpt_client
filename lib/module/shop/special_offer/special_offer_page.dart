@@ -7,6 +7,7 @@ import 'package:gpt/core/colors.dart';
 import 'package:gpt/core/constants.dart';
 import 'package:gpt/data/models/plan_model.dart';
 import 'package:gpt/module/shop/special_offer/special_offer_controller.dart';
+import 'package:gpt/services/shop_service.dart';
 
 class SpecialOfferPage extends GetView<SpecialOfferController>{
   final Plan plan;
@@ -84,7 +85,10 @@ class SpecialOfferPage extends GetView<SpecialOfferController>{
                       )
                     ),
                     onPressed: () {
-                      controller.getZarinpalUrl(plan.id);
+                      ShopService().myketShop(context,
+                          plan.myket,
+                          plan.id);
+                      // controller.getZarinpalUrl(plan.id);
                     },
                     child: Text(GlobalStrings.getLifeTimePro,
                     style: TextStyle(

@@ -26,6 +26,7 @@ class GlobalURL{
   static Uri getGooglePlayCode = Uri(scheme: scheme,port: port, host: host, path: '/api/shop/get_googleplay_code/');
   static Uri getAppstoreCode = Uri(scheme: scheme,port: port, host: host, path: '/api/shop/get_appstore_code/');
   static Uri getZarinpalUrl = Uri(scheme: scheme,port: port, host: host, path: '/api/shop/get_zarinpal_url/');
+  static Uri addOrder = Uri(scheme: scheme, host: host, path: '/api/shop/add_bazar_myket_order/');
 
   // conversation
   static Uri createConversation = Uri(scheme: scheme,port: port, host: host, path: '/api/conversation/create_conversation/');

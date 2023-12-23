@@ -8,6 +8,7 @@ import 'package:gpt/core/constants.dart';
 import 'package:gpt/global/widgets/progress_indicator.dart';
 import 'package:gpt/module/settings/settings_controller.dart';
 import 'package:gpt/module/shop/plans/shop_controller.dart';
+import 'package:gpt/services/shop_service.dart';
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 import 'dart:ui' as ui;
 
@@ -293,7 +294,9 @@ class ShopPage extends GetView<SettingsController>{
                         )
                     ),
                     onPressed: () {
-                      controller.getZarinpalUrl();
+                      ShopService().myketShop(context,
+                          controller.plans[controller.selectedIndex.value].myket,
+                          controller.plans[controller.selectedIndex.value].id);
                     },
                     child: Text(GlobalStrings.buy,
                       style: TextStyle(
