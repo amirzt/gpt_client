@@ -1,54 +1,62 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_poolakey/flutter_poolakey.dart';
+import 'package:gpt/global/widgets/loading_dialog.dart';
 import 'package:gpt/module/shop/update_bottom_sheet.dart';
-
+import 'package:myket_iap/myket_iap.dart';
+import 'package:myket_iap/util/iab_result.dart';
+import 'package:myket_iap/util/purchase.dart';
 class ShopService{
   myketShop(BuildContext context, String sku, int id) async{
-    String RSA = 'MIHNMA0GCSqGSIb3DQEBAQUAA4G7ADCBtwKBrwCq8DWfxGtW+zS++0HKG83G2TuPVDfzSXerzfL2Vm/Tz6H50w8KZAK+4w+bRCOVF+NUxUFI5/FT4sPtFAfmuXl+I3yU6pL7I/VMkoez6SWy5qZyC3S1VkNBldXwRtcEMqvrYYpKiaKgAeNED2HkDVa39Fmv1UaEBwC32f3+nJN8xRtPhlQMDbzKibiJomfg3CFk9NuN0ijUMg8Oz18F1FFy0c+bZqx8D334KTtHeDECAwEAAQ==';
-    print(sku);
-    await FlutterPoolakey.connect(RSA, onDisconnected: (){
-
-    });
-
     try{
-      PurchaseInfo purchaseInfo = await FlutterPoolakey.subscribe(
-          sku,
-          payload: '');
+      String RSA = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIunlEtqJfx8R5D110vW627BOzdrCXmFMMEOMTUtVzVv2+wSByEssgduLUp35h0FfpsyRDxP7pJNq8Vv3myljj3IYV5ILSLG8FbLC31neiaBFLQu8bqlycmAOq4a8/6QWneR6GBhxT/dStoSPBOuZJqOUj2z5xKaocInTmIqj6CwIDAQAB';
+      // print(sku);
+      await MyketIAP.init(rsaKey: RSA, enableDebugLogging: true);
 
-      if(purchaseInfo.purchaseState.name == 'PURCHASED'){
+      Map<dynamic, dynamic> result = await MyketIAP.launchPurchaseFlow(
+          sku: sku,
+          payload:'payload');
+      print("what happend: "+ result.toString());
+      Purchase purchase = result[MyketIAP.PURCHASE];
+      IabResult purchaseResult = result[MyketIAP.RESULT];
+      print('result :'+purchaseResult.mMessage);
+      if(purchaseResult.isFailure()){
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('خرید انجام نشد. در صورت مشکل با پشتیبانی تماس بگیرید.'))
+        );
+      }else{
+        showLoaderDialog(context);
+        await MyketIAP.consume(purchase: purchase);
+        Navigator.of(context).pop();
         showModalBottomSheet(context: context,
           isDismissible: false,
           builder: (context) => UpdateDateBottomSheet(
               id,
-              purchaseInfo.purchaseToken),
+              purchase.mToken),
         );
       }
-    }on PlatformException catch(e){
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.message.toString()))
-      );
+    }catch(e){
+      // showMarketDialog(context);
     }
+
 
   }
 
-  // showMarketDialog(BuildContext context){
-  //   showDialog(
-  //       context: context,
-  //       builder: (context) => SimpleDialog(
-  //         children: [
-  //           Padding(
-  //             padding: const EdgeInsets.all(15),
-  //             child: Text(Market.market ==1
-  //                 ?BazarStrings.checkBazar
-  //                 :MyKetStrings.checkMyKet,
-  //               textAlign: TextAlign.center,
-  //               style: const TextStyle(fontSize: 18),
-  //             ),
-  //           )
-  //         ],
-  //       )
-  //   );
-  // }
+// showMarketDialog(BuildContext context){
+//   showDialog(
+//       context: context,
+//       builder: (context) => SimpleDialog(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.all(15),
+//             child: Text(Market.market ==1
+//                 ?BazarStrings.checkBazar
+//                 :MyKetStrings.checkMyKet,
+//               textAlign: TextAlign.center,
+//               style: const TextStyle(fontSize: 18),
+//             ),
+//           )
+//         ],
+//       )
+//   );
+// }
 }

@@ -91,7 +91,7 @@ class UpdateDateBottomSheetState extends State<UpdateDateBottomSheet> {
           GlobalURL.addOrder,
           {
             'plan': days,
-            'gateway': 'bazar',
+            'gateway': 'myket',
             'gateway_code': widget.trackingCode
           }
       );

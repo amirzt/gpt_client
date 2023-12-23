@@ -37,6 +37,7 @@ dependencies:
   scroll_loop_auto_scroll: ^0.0.5
   flutter_highlight: ^0.7.0
   flutter_poolakey: ^2.0.1
+  myket_iap: ^1.1.4
 
   #  share_plus: ^7.1.0
 
