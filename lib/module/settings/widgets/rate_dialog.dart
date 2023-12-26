@@ -44,8 +44,7 @@ class RateUsDialog extends StatelessWidget {
     String packageName = packageInfo.packageName;
     if (Platform.isAndroid) {
       launchUrl(
-          Uri.parse(
-              'https://play.google.com/store/apps/details?id=$packageName'),
+          Uri.parse('https://cafebazaar.ir/app/$packageName'),
           mode: LaunchMode.externalApplication);
     } else {
       launchUrl(Uri.parse(''), mode: LaunchMode.externalApplication);
