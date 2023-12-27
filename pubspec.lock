@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  change_app_package_name:
+    dependency: "direct dev"
+    description:
+      name: change_app_package_name
+      sha256: f9ebaf68a4b5a68c581492579bb68273c523ef325fbf9ce2f1b57fb136ad023b
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   characters:
     dependency: transitive
     description:
@@ -267,14 +275,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.16"
-  flutter_poolakey:
-    dependency: "direct main"
-    description:
-      name: flutter_poolakey
-      sha256: "1ae4764c350e68141f065c2e3473dc1e89aa37382425029ca9960be8d40a3d45"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -505,10 +505,10 @@ packages:
     dependency: "direct main"
     description:
       name: myket_iap
-      sha256: "8b9cdee7d1941552c72a8e366f16f56e3740671a7d7ee612e52def3012f1f743"
+      sha256: fa8c1b7cabc687b4f205a8ed1312641861ec53cf074a66fe6e7a35cde846715d
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.4"
+    version: "1.1.2"
   package_info_plus:
     dependency: "direct main"
     description:

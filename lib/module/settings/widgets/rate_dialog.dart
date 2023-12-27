@@ -45,7 +45,7 @@ class RateUsDialog extends StatelessWidget {
     if (Platform.isAndroid) {
       launchUrl(
           Uri.parse(
-              'https://play.google.com/store/apps/details?id=$packageName'),
+              'https://myket.ir/app/$packageName'),
           mode: LaunchMode.externalApplication);
     } else {
       launchUrl(Uri.parse(''), mode: LaunchMode.externalApplication);

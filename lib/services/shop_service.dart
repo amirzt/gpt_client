@@ -8,7 +8,7 @@ import 'package:myket_iap/util/purchase.dart';
 class ShopService{
   myketShop(BuildContext context, String sku, int id) async{
     try{
-      String RSA = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIunlEtqJfx8R5D110vW627BOzdrCXmFMMEOMTUtVzVv2+wSByEssgduLUp35h0FfpsyRDxP7pJNq8Vv3myljj3IYV5ILSLG8FbLC31neiaBFLQu8bqlycmAOq4a8/6QWneR6GBhxT/dStoSPBOuZJqOUj2z5xKaocInTmIqj6CwIDAQAB';
+      String RSA = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCR1bZOreI6Xx+9P0oP5oRfmiTdXrH/ZJxWpQH1zNFskNl/bt3SDP2JUR3XReMfF3riQsI7EH2NRAgl0hr+ANn5qRho8ZIDNXDhNdXAL94JqnU84IhOzmAYZ+xjUy1DTmnuSJBUrk09+6EpdxlNik1kgX2sPnuHk0reSPBJsgMDLQIDAQAB';
       // print(sku);
       await MyketIAP.init(rsaKey: RSA, enableDebugLogging: true);
 

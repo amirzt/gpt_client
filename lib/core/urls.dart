@@ -1,11 +1,11 @@
 
 class GlobalURL{
 
-  static const String host = '193.36.84.224';
+  static const String host = '176.9.192.107';
   // static const String host = 'addstory.website';
 
   static const String scheme = 'http';
-  static const int port = 8001;
+  static const int port = 8000;
 
 
 
