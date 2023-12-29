@@ -17,6 +17,7 @@ class SettingsPage extends GetView<SettingsController> {
         fontSize: 16,
         fontWeight: FontWeight.bold);
     Get.put(SettingsController());
+    controller.getExpireDate();
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
       child: Container(
