@@ -5,7 +5,7 @@ class GlobalURL{
   // static const String host = 'addstory.website';
 
   static const String scheme = 'http';
-  static const int port = 8000;
+  static const int port = 80;
 
 
 
@@ -26,7 +26,7 @@ class GlobalURL{
   static Uri getGooglePlayCode = Uri(scheme: scheme,port: port, host: host, path: '/api/shop/get_googleplay_code/');
   static Uri getAppstoreCode = Uri(scheme: scheme,port: port, host: host, path: '/api/shop/get_appstore_code/');
   static Uri getZarinpalUrl = Uri(scheme: scheme,port: port, host: host, path: '/api/shop/get_zarinpal_url/');
-  static Uri addOrder = Uri(scheme: scheme, host: host, path: '/api/shop/add_bazar_myket_order/');
+  static Uri addOrder = Uri(scheme: scheme,port: port, host: host, path: '/api/shop/add_bazar_myket_order/');
 
   // conversation
   static Uri createConversation = Uri(scheme: scheme,port: port, host: host, path: '/api/conversation/create_conversation/');
