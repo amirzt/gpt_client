@@ -103,6 +103,8 @@ class GlobalStrings{
   static String bestAnswer = 'bestAnswer';
 
   static String listening = 'Listening ...';
+  static String leftDays = 'leftDays';
+  static String day = 'day';
 
 
 }

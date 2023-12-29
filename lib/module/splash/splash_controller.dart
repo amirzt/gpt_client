@@ -23,6 +23,7 @@ class SplashController extends GetxController with GetSingleTickerProviderStateM
     // animationController.forward();
     // repeatAnim();
     startAnimations();
+    getUserInfo();
   }
 
   void getUserInfo() async{

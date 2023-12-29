@@ -45,6 +45,7 @@ class ApiProvider {
       prefs.setBool('expired', response['expired']);
       prefs.setString('username', response['username']);
       prefs.setBool('limit_reached', response['limit_reached']);
+      prefs.setString('expire_date', response['expire_date']);
 
       List apikey = response['api_key'];
       List<String> strings = [];

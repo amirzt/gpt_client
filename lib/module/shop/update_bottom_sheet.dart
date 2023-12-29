@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:gpt/core/urls.dart';
 import 'package:gpt/global/widgets/progress_indicator.dart';
+import 'package:gpt/module/settings/settings_controller.dart';
 import 'package:gpt/module/splash/splash_page.dart';
 import 'package:gpt/provider/token.dart';
 import 'package:gpt/services/global_services.dart';
