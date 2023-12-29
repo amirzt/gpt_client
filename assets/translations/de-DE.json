@@ -85,6 +85,7 @@
   "addFree": "Werbefrei!",
   "removeAd": "Werbung entfernen",
   "moreDetail": "Weitere Details",
-  "bestAnswer": "Beste Antwort"
-
+  "bestAnswer": "Beste Antwort",
+  "leftDays": "Tage übrig",
+  "day": "Tag"
 }

@@ -54,6 +54,30 @@ class SettingsPage extends GetView<SettingsController> {
               const SizedBox(
                 height: 20,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    GlobalStrings.leftDays,
+                    style: TextStyle(color: GlobalColors.whiteTextColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ).tr(),
+                  Obx(() => Text(
+                    " : ${controller.leftDays.value} ",
+                    style: TextStyle(color: GlobalColors.whiteTextColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ),),
+                  Text(
+                    GlobalStrings.day,
+                    style: TextStyle(color: GlobalColors.whiteTextColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                  ).tr()
+                ],
+              ),
+              const SizedBox(height: 10,),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),

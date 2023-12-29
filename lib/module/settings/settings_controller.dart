@@ -20,15 +20,33 @@ class SettingsController extends GetxController {
 
   var isLoading = false.obs;
   var selectedIndex = 0.obs;
+  var leftDays = 0.obs;
 
   @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
+    getExpireDate();
+
     getZarinpalPlans();
     getEmail();
     Get.put(ShopController());
 
+  }
+
+  void getExpireDate() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String expireDate = prefs.getString('expire_date') ?? 'error';
+    if(expireDate != 'error'){
+      DateTime expire = DateTime.parse(expireDate);
+      DateTime now = DateTime.now();
+      leftDays.value = expire.difference(now).inDays;
+      if(leftDays.value < 0){
+        leftDays.value = 0 ;
+      }
+      // print(leftDays.value);
+    }
+    update();
   }
 
   void changeLanguage(BuildContext context) {

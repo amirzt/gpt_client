@@ -101,8 +101,10 @@ class GlobalStrings{
   static String removeAd = 'removeAd';
   static String moreDetail = 'moreDetail';
   static String bestAnswer = 'bestAnswer';
-
   static String listening = 'Listening ...';
+
+  static String leftDays = 'leftDays';
+  static String day = 'day';
 
 
 }
