@@ -12,6 +12,7 @@ import 'package:gpt/module/chat/widgets/input_widget.dart';
 import 'package:gpt/module/chat/widgets/model_choice_widget.dart';
 import 'package:gpt/module/chat/widgets/user_message_widget.dart';
 import 'package:gpt/provider/api_provider.dart';
+import 'package:http/http.dart' as http;
 
 class ChatPage extends StatelessWidget {
   final int id;
@@ -30,6 +31,7 @@ class ChatPage extends StatelessWidget {
     controller.conversationId = id;
     controller.getMessages();
     addTaskMessage();
+    checkUserIp();
     // controller.sendMessage();
     return GetBuilder<ChatController>(
       builder: (controller){
@@ -93,6 +95,26 @@ class ChatPage extends StatelessWidget {
         );
         controller.sendMessageToGPT();
       }
+    }
+  }
+
+  void checkUserIp() async{
+    bool value = await isUserInIran();
+    if(value) {
+      Get.snackbar('خطای IP',
+          'متاسفانه سرویس های چت جی پی تی با آیپی ایران قابل دسترسی نیست. لطفا از نرم افزارهای تغییر آیپی استفاده کنید.',
+          backgroundColor: Colors.redAccent,
+          colorText: Colors.white,
+          duration: const Duration(seconds: 6));
+    }
+  }
+
+  static Future<bool> isUserInIran() async {
+    final response = await http.get(Uri.parse('https://ipinfo.io/json'));
+    if (response.statusCode == 403) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
